@@ -8,8 +8,8 @@ import (
 	"strings"
 )
 
-// Добавление информацию об оригинальной ошибке и http статусе.
-func (e *EventStruct) AddError(err error, httpStatus int) Event {
+// Добавление оригинальной ошибки.
+func (e *EventStruct) AddError(err error) Event {
 	if e == nil {
 		log.Print(fmt.Errorf("nil EventStruct"))
 		return e
@@ -17,11 +17,25 @@ func (e *EventStruct) AddError(err error, httpStatus int) Event {
 
 	if err != nil {
 		e.OriginalError = err.Error()
-		e.StatusHTTP = httpStatus
 	} else {
 		e.OriginalError = "error nil"
+	}
+
+	if e.StatusHTTP == 0 {
 		e.StatusHTTP = http.StatusInternalServerError
 	}
+
+	return e
+}
+
+// Установка http статуса.
+func (e *EventStruct) SetStatusHTTP(statusHTTP int) Event {
+	if e == nil {
+		log.Print(fmt.Errorf("nil EventStruct"))
+		return e
+	}
+
+	e.StatusHTTP = statusHTTP
 	return e
 }
 
