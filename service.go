@@ -37,7 +37,7 @@ type ParentEvent interface {
 type Event interface {
 	// Добавление информацию об оригинальной ошибке.
 	AddError(err error) Event
-	// Добавление http статуса.
+	// Установка http статуса.
 	SetStatusHTTP(statusHTTP int) Event
 	// Добавление контекста.
 	AddContext(context map[string]interface{}) Event

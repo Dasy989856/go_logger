@@ -15,7 +15,7 @@ type Confing struct {
 	NameService string
 }
 
-func parseLogLevel(loglevel string) Level {
+func ParseLogLevel(loglevel string) Level {
 	switch strings.ToLower(loglevel) {
 	case "debug":
 		return DebugLevel
@@ -43,7 +43,7 @@ func (l *LoggerStruct) SetConfig(config *Confing) {
 	}
 
 	if config.LogLevel != "" {
-		l.LogLevel = parseLogLevel(config.LogLevel)
+		l.LogLevel = ParseLogLevel(config.LogLevel)
 	}
 }
 
