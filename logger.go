@@ -9,50 +9,54 @@ import (
 	"strings"
 )
 
-// Добавление API сервиса логирования.
-func (l *LoggerStruct) AddLogServiceAPI(urlAPI string) Logger {
+type Confing struct {
+	UserId      int
+	LogLevel    string
+	NameService string
+}
+
+func parseLogLevel(loglevel string) Level {
+	switch strings.ToLower(loglevel) {
+	case "debug":
+		return DebugLevel
+	case "info":
+		return InfoLevel
+	case "warning":
+		return WarningLevel
+	case "error":
+		return ErrorLevel
+	case "critical":
+		return CriticalLevel
+	default:
+		return DebugLevel
+	}
+}
+
+// Установка конфигурации logger.
+func (l *LoggerStruct) SetConfig(config *Confing) {
+	if config == nil {
+		return
+	}
+
+	if config.UserId != 0 {
+		l.UserId = config.UserId
+	}
+
+	if config.LogLevel != "" {
+		l.LogLevel = parseLogLevel(config.LogLevel)
+	}
+}
+
+// Создание родительского события.
+func (l *LoggerStruct) InitParentEvent(packet, function string) ParentEvent {
 	if l == nil {
 		log.Print(fmt.Errorf("nil logger"))
 		return l
 	}
 
-	l.LogServiceAPI = urlAPI
+	l.Package = packet
+	l.Function = function
 	return l
-}
-
-// Добавление UserID в logger.
-func (l *LoggerStruct) AddUserId(userId int) Logger {
-	if l == nil {
-		log.Print(fmt.Errorf("nil logger"))
-		return l
-	}
-
-	l.UserId = userId
-	return l
-}
-
-// Добавление имени сервиса в logger.
-func (l *LoggerStruct) AddServiceName(serviceName string) Logger {
-	if l == nil {
-		log.Print(fmt.Errorf("nil logger"))
-		return l
-	}
-
-	l.Service = serviceName
-	return l
-}
-
-// Инициализация BackgroundEventStruct. (Родитель событий).
-func (l *LoggerStruct) InitBackgroundEvent(packet, function string) BackgroundEvent {
-	if l == nil {
-		log.Print(fmt.Errorf("nil logger"))
-	}
-
-	return &BackgroundEventStruct{
-		Logger:   l,
-		Package:  packet,
-		Function: function,
-	}
 }
 
 // Отправка в сервис логирования.

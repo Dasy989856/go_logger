@@ -1,7 +1,6 @@
 package logger
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -60,33 +59,6 @@ func (e *EventStruct) ToJson() ([]byte, error) {
 		return nil, err
 	}
 	return js, nil
-}
-
-// Отправка события в сервис логирования, при неудаче - запись в StdOut.
-// Дублирование событий тип WARNING, ERROR, CRITICAL в StdOut.
-func (e *EventStruct) WriteToDataBase() error {
-	if e == nil {
-		return fmt.Errorf("nil EventStruct")
-	}
-
-	if e.Level == "WARNING" || e.Level == "ERROR" || e.Level == "CRITICAL" {
-		// Дублирование ошибок в StdOut.
-		e.WriteToStdOut()
-	}
-
-	EventStructJson, err := e.ToJson()
-	if err != nil {
-		return err
-	}
-
-	// Отправка лога и получение ответа от сервиса логирования.
-	respLog, err := http.Post(e.LogServiceAPI, "application/json", bytes.NewBuffer(EventStructJson))
-	if err != nil || respLog.StatusCode != 200 {
-		e.WriteToStdOut()
-		return err
-	}
-
-	return nil
 }
 
 // Вывод EventStruct в StdOut в формате Json.

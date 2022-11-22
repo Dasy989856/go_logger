@@ -15,20 +15,14 @@ type LoggerStruct struct {
 	LogLevel      Level          `json:"logLevel,omitempty"`      // Уровень логирования.
 	LogServiceAPI string         `json:"logServiceAPI,omitempty"` // API сервиса логирования.
 	UserId        int            `json:"-"`                       // ID пользователя.
-	Service       string         `json:"-"`                       // Название сервсиса.
-	Events        []*EventStruct `json:"events,omitempty"`        // Массив событий.
-}
-
-// Структура события.
-type BackgroundEventStruct struct {
-	Logger   *LoggerStruct
-	Package  string // Название пакета.
-	Function string // Название функции.
+	NameService   string         `json:"-"`                       // Название сервсиса.
+	Package       string         // Название пакета.
+	Function      string         // Название функции.
+	Events        []*EventStruct `json:"events,omitempty"` // Массив событий.
 }
 
 // Данные события
 type EventStruct struct {
-	LogServiceAPI string                 `json:"logServiceAPI,omitempty"` // API сервиса логирования.
 	UserId        int                    `json:"userId"`                  // ID пользователя.
 	CreatedAt     string                 `json:"createdAt"`               // Дата создания.
 	Level         string                 `json:"level"`                   // Уровень.

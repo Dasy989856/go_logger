@@ -1,39 +1,19 @@
 package logger
 
-// Инициализация logger.
-func NewLogger(userId int, serviceName, loglevel, logServiceAPI string) Logger {
-	logger := LoggerStruct{
-		UserId:  userId,
-		Service: serviceName,
+// Инициализация logger. 
+func NewLogger(config *Confing) Logger {
+	var logger *LoggerStruct
+	if config != nil {
+		logger.SetConfig(config)
 	}
-
-	switch loglevel {
-	case "":
-		logger.LogLevel = DebugLevel
-	case "DEBUG":
-		logger.LogLevel = DebugLevel
-	case "INFO":
-		logger.LogLevel = InfoLevel
-	case "WARNING":
-		logger.LogLevel = WarningLevel
-	case "ERROR":
-		logger.LogLevel = ErrorLevel
-	case "CRITICAL":
-		logger.LogLevel = CriticalLevel
-	}
-
-	return &logger
+	return logger
 }
 
 type Logger interface {
-	// Добавление API сервиса логирования.
-	AddLogServiceAPI(urlAPI string) Logger
-	// Добавление UserID в logger.
-	AddUserId(userId int) Logger
-	// Добавление имени сервиса в logger.
-	AddServiceName(serviceName string) Logger
+	// Установка конфигурации logger.
+	SetConfig(*Confing)
 	// Инициализация BackgroundEventStruct. (Родитель событий).
-	InitBackgroundEvent(packet, function string) BackgroundEvent
+	InitParentEvent(packet, function string) ParentEvent
 	// Отправка в сервис логирования.
 	SendToLogService() error
 	// Вывод logger в StdOut в формате Json.
@@ -46,7 +26,7 @@ type Logger interface {
 	GetStatusHTTP() int
 }
 
-type BackgroundEvent interface {
+type ParentEvent interface {
 	Critical(codeMessage int, paramsMessage ...string) Event
 	Error(codeMessage int, paramsMessage ...string) Event
 	Warning(codeMessage int, paramsMessage ...string) Event
@@ -63,9 +43,6 @@ type Event interface {
 	Error() string
 	// Получение события в формате Json.
 	ToJson() ([]byte, error)
-	// Отправка события в сервис логирования, при неудаче - запись в StdOut.
-	// Дублирование событий тип WARNING, ERROR, CRITICAL в StdOut.
-	WriteToDataBase() error
 	// Вывод EventStruct в StdOut в формате Json.
 	WriteToStdOut()
 }
