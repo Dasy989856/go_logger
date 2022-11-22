@@ -33,7 +33,7 @@ type Logger interface {
 	// Добавление имени сервиса в logger.
 	AddServiceName(serviceName string) Logger
 	// Инициализация BackgroundEventStruct. (Родитель событий).
-	InitBackgroundEvent(packet, function string) (BackgroundEvent, error)
+	InitBackgroundEvent(packet, function string) BackgroundEvent
 	// Отправка в сервис логирования.
 	SendToLogService() error
 	// Вывод logger в StdOut в формате Json.

@@ -43,16 +43,16 @@ func (l *LoggerStruct) AddServiceName(serviceName string) Logger {
 }
 
 // Инициализация BackgroundEventStruct. (Родитель событий).
-func (l *LoggerStruct) InitBackgroundEvent(packet, function string) (BackgroundEvent, error) {
+func (l *LoggerStruct) InitBackgroundEvent(packet, function string) BackgroundEvent {
 	if l == nil {
-		return nil, fmt.Errorf("nil logger")
+		log.Print(fmt.Errorf("nil logger"))
 	}
 
 	return &BackgroundEventStruct{
 		Logger:   l,
 		Package:  packet,
 		Function: function,
-	}, nil
+	}
 }
 
 // Отправка в сервис логирования.
