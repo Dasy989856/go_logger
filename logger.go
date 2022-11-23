@@ -9,11 +9,7 @@ import (
 	"strings"
 )
 
-type Confing struct {
-	UserId      int
-	LogLevel    string
-	NameService string
-}
+
 
 func ParseLogLevel(loglevel string) Level {
 	switch strings.ToLower(loglevel) {
@@ -33,7 +29,7 @@ func ParseLogLevel(loglevel string) Level {
 }
 
 // Установка конфигурации logger.
-func (l *LoggerStruct) SetConfig(config *Confing) {
+func (l *LoggerStruct) SetConfig(config *Config) {
 	if config == nil {
 		return
 	}

@@ -1,7 +1,7 @@
 package logger
 
 // Инициализация logger. 
-func NewLogger(config *Confing) Logger {
+func NewLogger(config *Config) Logger {
 	var logger *LoggerStruct
 	if config != nil {
 		logger.SetConfig(config)
@@ -11,7 +11,7 @@ func NewLogger(config *Confing) Logger {
 
 type Logger interface {
 	// Установка конфигурации logger.
-	SetConfig(*Confing)
+	SetConfig(*Config)
 	// Инициализация BackgroundEventStruct. (Родитель событий).
 	InitParentEvent(packet, function string) ParentEvent
 	// Отправка в сервис логирования.

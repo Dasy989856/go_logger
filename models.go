@@ -10,6 +10,12 @@ const (
 	CriticalLevel
 )
 
+type Config struct {
+	UserId      int
+	LogLevel    string
+	NameService string
+}
+
 // Структура логера.
 type LoggerStruct struct {
 	LogLevel      Level          `json:"logLevel,omitempty"`      // Уровень логирования.
