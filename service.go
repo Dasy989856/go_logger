@@ -1,6 +1,6 @@
 package logger
 
-// Инициализация logger. 
+// Инициализация logger.
 func NewLogger(config *Config) Logger {
 	var logger *LoggerStruct
 	if config != nil {
@@ -43,6 +43,8 @@ type Event interface {
 	AddContext(context map[string]interface{}) Event
 	// Получение оригинальной ошибки в формате string.
 	Error() string
+	// Получения сообщения кода.
+	GetMessage() string
 	// Получение события в формате Json.
 	ToJson() ([]byte, error)
 	// Вывод EventStruct в StdOut в формате Json.
