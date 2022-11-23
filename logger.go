@@ -9,8 +9,6 @@ import (
 	"strings"
 )
 
-
-
 func ParseLogLevel(loglevel string) Level {
 	switch strings.ToLower(loglevel) {
 	case "debug":
@@ -31,15 +29,24 @@ func ParseLogLevel(loglevel string) Level {
 // Установка конфигурации logger.
 func (l *LoggerStruct) SetConfig(config *Config) {
 	if config == nil {
+		log.Print(fmt.Errorf("nil config"))
 		return
+	}
+
+	if config.LogLevel != "" {
+		l.LogLevel = ParseLogLevel(config.LogLevel)
+	}
+
+	if config.LogServiceAPI != "" {
+		l.LogServiceAPI = config.LogServiceAPI
 	}
 
 	if config.UserId != 0 {
 		l.UserId = config.UserId
 	}
 
-	if config.LogLevel != "" {
-		l.LogLevel = ParseLogLevel(config.LogLevel)
+	if config.NameService != "" {
+		l.NameService = config.NameService
 	}
 }
 

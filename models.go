@@ -11,9 +11,10 @@ const (
 )
 
 type Config struct {
-	UserId      int
-	LogLevel    string
-	NameService string
+	LogLevel      string
+	LogServiceAPI string
+	UserId        int
+	NameService   string
 }
 
 // Структура логера.
