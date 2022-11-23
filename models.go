@@ -24,7 +24,6 @@ type LoggerStruct struct {
 	Events        []*EventStruct  `json:"events,omitempty"`        // Массив событий.
 	UserId        int             `json:"-"`                       // ID пользователя.
 	NameService   string          `json:"-"`                       // Название сервсиса.
-	ChildLoggers  []*LoggerStruct `json:"-"`
 }
 
 type ParentEventStruct struct {
