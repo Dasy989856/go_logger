@@ -12,7 +12,7 @@ import (
 // Добавление оригинальной ошибки.
 func (e *EventStruct) AddError(err error) Event {
 	if e == nil {
-		log.Print(fmt.Errorf("nil EventStruct"))
+		log.Print(fmt.Errorf("nil event"))
 		return e
 	}
 
@@ -32,7 +32,7 @@ func (e *EventStruct) AddError(err error) Event {
 // Установка http статуса.
 func (e *EventStruct) SetStatusHTTP(statusHTTP int) Event {
 	if e == nil {
-		log.Print(fmt.Errorf("nil EventStruct"))
+		log.Print(fmt.Errorf("nil event"))
 		return e
 	}
 
@@ -43,7 +43,7 @@ func (e *EventStruct) SetStatusHTTP(statusHTTP int) Event {
 // Добавление контекста.
 func (e *EventStruct) AddContext(context map[string]interface{}) Event {
 	if e == nil {
-		log.Print(fmt.Errorf("nil EventStruct"))
+		log.Print(fmt.Errorf("nil event"))
 		return e
 	}
 
@@ -68,39 +68,31 @@ func (e *EventStruct) GetMessage() string {
 	return e.Message
 }
 
-// Получение события в формате Json.
-func (e *EventStruct) ToJson() ([]byte, error) {
+// Получение события в формате Json. 
+// TODO перевести в ручное форматирование к JSON. `https://go.dev/play/p/SH5bsrjzB06`
+func (e *EventStruct) ToJson() []byte {
 	if e == nil {
-		return nil, fmt.Errorf("nil EventStruct")
+		log.Print("nil event")
+		return nil
 	}
 
-	js, err := json.Marshal(e)
+	jsEvent, err := json.Marshal(e)
 	if err != nil {
-		return nil, err
+		log.Print(err)
+		return nil
 	}
-	return js, nil
+	return jsEvent
 }
 
 // Вывод EventStruct в StdOut в формате Json.
 func (e *EventStruct) Print() {
 	if e == nil {
-		log.Print(fmt.Errorf("nil EventStruct"))
+		log.Print(fmt.Errorf("nil event"))
 		return
 	}
 
-	EventStructJson, err := e.ToJson()
-	if err != nil {
-		context := map[string]interface{}{
-			"fucn":        "WriteToStdOut",
-			"EventStruct": e,
-			"error":       err.Error(),
-		}
-		log.Print(context)
-		return
-	}
-
-	fmt.Println(strings.Repeat("=", 25), "EventStruct", strings.Repeat("=", 25))
-	fmt.Println(string(EventStructJson))
+	fmt.Println(strings.Repeat("=", 25), "EVENT", strings.Repeat("=", 25))
+	fmt.Println(string(e.ToJson()))
 	fmt.Println(strings.Repeat("=", 60))
 }
 
@@ -113,16 +105,11 @@ func (e *EventStruct) SendToLogService() error {
 		return fmt.Errorf("empty Log service API")
 	}
 
-	jsonEventStruct, err := e.ToJson()
-	if err != nil {
-		return err
-	}
-
 	if e.Level == "warning" || e.Level == "error" || e.Level == "critical" {
 		e.Print()
 	}
 
-	respLog, err := http.Post(e.LogServiceAPI, "application/json", bytes.NewBuffer(jsonEventStruct))
+	respLog, err := http.Post(e.LogServiceAPI, "application/json", bytes.NewBuffer(e.ToJson()))
 	if err != nil || respLog.StatusCode != http.StatusOK {
 		return err
 	}

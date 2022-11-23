@@ -77,16 +77,11 @@ func (l *LoggerStruct) SendToLogService() error {
 	}
 
 	for i, event := range l.Events {
-		jsonEventStruct, err := event.ToJson()
-		if err != nil {
-			return err
-		}
-
 		if event.Level == "warning" || event.Level == "error" || event.Level == "critical" {
 			event.Print()
 		}
 
-		respLog, err := http.Post(l.LogServiceAPI, "application/json", bytes.NewBuffer(jsonEventStruct))
+		respLog, err := http.Post(l.LogServiceAPI, "application/json", bytes.NewBuffer(event.ToJson()))
 		if err != nil || respLog.StatusCode != http.StatusOK {
 			return err
 		}
@@ -103,20 +98,16 @@ func (l *LoggerStruct) Print() {
 		return
 	}
 
-	logerJson, err := l.ToJson()
-	if err != nil {
-		log.Print(err)
-	}
-
 	fmt.Println(strings.Repeat("=", 25), "LOGGER", strings.Repeat("=", 25))
-	fmt.Println(string(logerJson))
+	fmt.Println(string(l.ToJson()))
 	fmt.Println(strings.Repeat("=", 60))
 }
 
 // Получение logger с трасировкой событий в формате Json.
-func (l *LoggerStruct) ToJson() ([]byte, error) {
+func (l *LoggerStruct) ToJson() []byte {
 	if l == nil {
-		return nil, fmt.Errorf("nil logger")
+		log.Print("nil logger")
+		return nil
 	}
 
 	arrEventStructs := make([]*EventStruct, 0, 5)
@@ -140,14 +131,16 @@ func (l *LoggerStruct) ToJson() ([]byte, error) {
 			"error":  err.Error(),
 		}
 		log.Print(context)
+		return nil
 	}
-	return jsonLogger, nil
+	return jsonLogger
 }
 
 // Форматирование событий в формат приемлемый для фронтенда.
-func (l *LoggerStruct) ToFrontendJson() ([]byte, error) {
+func (l *LoggerStruct) ToFrontendJson() []byte {
 	if l == nil {
-		return nil, fmt.Errorf("nil logger")
+		log.Print("nil logger")
+		return nil
 	}
 
 	bodyResponse := struct {
@@ -155,7 +148,7 @@ func (l *LoggerStruct) ToFrontendJson() ([]byte, error) {
 	}{}
 
 	for _, log := range l.Events {
-		if log.Level != "ERROR" {
+		if log.Level != "error" {
 			continue
 		}
 
@@ -170,9 +163,14 @@ func (l *LoggerStruct) ToFrontendJson() ([]byte, error) {
 
 	jsonResp, err := json.Marshal(bodyResponse)
 	if err != nil {
-		return nil, err
+		context := map[string]interface{}{
+			"logger": l,
+			"error":  err.Error(),
+		}
+		log.Print(context)
+		return nil
 	}
-	return jsonResp, nil
+	return jsonResp
 }
 
 // Получение HTTP статуса logger (статус крайнего события).

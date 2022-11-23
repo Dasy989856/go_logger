@@ -19,9 +19,9 @@ type Logger interface {
 	// Вывод logger в StdOut в формате Json.
 	Print()
 	// Получение logger с трасировкой событий в формате Json.
-	ToJson() ([]byte, error)
+	ToJson() []byte
 	// Форматирование logger в формат приемлемый для фронтенда.
-	ToFrontendJson() ([]byte, error)
+	ToFrontendJson() []byte
 	// Получение HTTP статуса logger (статус крайнего события).
 	GetStatusHTTP() int
 }
@@ -46,7 +46,7 @@ type Event interface {
 	// Получения сообщения кода.
 	GetMessage() string
 	// Получение события в формате Json.
-	ToJson() ([]byte, error)
+	ToJson() []byte
 	// Вывод EventStruct в StdOut в формате Json.
 	Print()
 }
