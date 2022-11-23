@@ -19,11 +19,12 @@ type Config struct {
 
 // Структура логера.
 type LoggerStruct struct {
-	LogLevel      Level          `json:"logLevel,omitempty"`      // Уровень логирования.
-	LogServiceAPI string         `json:"logServiceAPI,omitempty"` // API сервиса логирования.
-	UserId        int            `json:"-"`                       // ID пользователя.
-	NameService   string         `json:"-"`                       // Название сервсиса.
-	Events        []*EventStruct `json:"events,omitempty"`        // Массив событий.
+	LogLevel      Level           `json:"logLevel,omitempty"`      // Уровень логирования.
+	LogServiceAPI string          `json:"logServiceAPI,omitempty"` // API сервиса логирования.
+	Events        []*EventStruct  `json:"events,omitempty"`        // Массив событий.
+	UserId        int             `json:"-"`                       // ID пользователя.
+	NameService   string          `json:"-"`                       // Название сервсиса.
+	ChildLoggers  []*LoggerStruct `json:"-"`
 }
 
 type ParentEventStruct struct {

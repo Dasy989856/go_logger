@@ -14,6 +14,8 @@ type Logger interface {
 	ChildLogger() Logger 
 	// Установка конфигурации logger.
 	SetConfig(*Config)
+	// Установка UserID.
+	SetUserId(userId int)
 	// Инициализация BackgroundEventStruct. (Родитель событий).
 	InitParentEvent(packet, function string) ParentEvent
 	// Отправка в сервис логирования.

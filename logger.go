@@ -27,12 +27,14 @@ func ParseLogLevel(loglevel string) Level {
 }
 
 func (l *LoggerStruct) ChildLogger() Logger {
-	return &LoggerStruct{
+	childLogger := &LoggerStruct{
 		LogLevel: l.LogLevel,
 		LogServiceAPI: l.LogServiceAPI,
 		UserId: l.UserId,
 		NameService: l.NameService,
 	}
+	l.ChildLoggers = append(l.ChildLoggers, childLogger)
+	return childLogger
 }
 
 // Установка конфигурации logger.
@@ -57,6 +59,11 @@ func (l *LoggerStruct) SetConfig(config *Config) {
 	if config.NameService != "" {
 		l.NameService = config.NameService
 	}
+}
+
+// Установка конфигурации logger.
+func (l *LoggerStruct) SetUserId(userId int) {
+		l.UserId = userId
 }
 
 // Создание родительского события.
@@ -185,7 +192,7 @@ func (l *LoggerStruct) ToFrontendJson() []byte {
 // Получение HTTP статуса logger (статус крайнего события).
 func (l *LoggerStruct) GetStatusHTTP() int {
 	for _, ev := range l.Events {
-		if ev.Level == "WARNING" || ev.Level == "ERROR" || ev.Level == "CRITICAL" {
+		if ev.Level == "warning" || ev.Level == "error" || ev.Level == "critical" {
 			return ev.StatusHTTP
 		}
 	}
