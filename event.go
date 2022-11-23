@@ -62,6 +62,11 @@ func (e *EventStruct) Error() string {
 	return e.OriginalError
 }
 
+// Получения сообщения кода.
+func (e *EventStruct) GetMessage() string {
+	return e.Message
+}
+
 // Получение события в формате Json.
 func (e *EventStruct) ToJson() ([]byte, error) {
 	if e == nil {
