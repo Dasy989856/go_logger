@@ -40,6 +40,15 @@ func (e *EventStruct) SetStatusHTTP(statusHTTP int) Event {
 	return e
 }
 
+// Получение http статуса.
+func (e *EventStruct) GetStatusHTTP(statusHTTP int) int {
+	if e == nil {
+		log.Print(fmt.Errorf("nil event"))
+		return 500
+	}
+	return e.StatusHTTP
+}
+
 // Добавление контекста.
 func (e *EventStruct) AddContext(context map[string]interface{}) Event {
 	if e == nil {
@@ -68,7 +77,7 @@ func (e *EventStruct) GetMessage() string {
 	return e.Message
 }
 
-// Получение события в формате Json. 
+// Получение события в формате Json.
 // TODO перевести в ручное форматирование к JSON. `https://go.dev/play/p/SH5bsrjzB06`
 func (e *EventStruct) ToJson() []byte {
 	if e == nil {

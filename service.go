@@ -41,6 +41,8 @@ type Event interface {
 	AddError(err error) Event
 	// Установка http статуса.
 	SetStatusHTTP(statusHTTP int) Event
+	// Получение http статуса.
+	GetStatusHTTP(statusHTTP int) int
 	// Добавление контекста.
 	AddContext(context map[string]interface{}) Event
 	// Получение оригинальной ошибки в формате string.
