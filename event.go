@@ -41,7 +41,7 @@ func (e *EventStruct) SetStatusHTTP(statusHTTP int) Event {
 }
 
 // Получение http статуса.
-func (e *EventStruct) GetStatusHTTP(statusHTTP int) int {
+func (e *EventStruct) GetStatusHTTP() int {
 	if e == nil {
 		log.Print(fmt.Errorf("nil event"))
 		return 500
