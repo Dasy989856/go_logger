@@ -112,6 +112,10 @@ func (l *LoggerStruct) Print() {
 		return
 	}
 
+	if len(l.Events) == 0 {
+		return
+	}
+
 	fmt.Println(strings.Repeat("=", 25), "LOGGER", strings.Repeat("=", 25))
 	fmt.Println(string(l.ToJson()))
 	fmt.Println(strings.Repeat("=", 60))
