@@ -26,6 +26,15 @@ func ParseLogLevel(loglevel string) Level {
 	}
 }
 
+func (l *LoggerStruct) ChildLogger() Logger {
+	return &LoggerStruct{
+		LogLevel: l.LogLevel,
+		LogServiceAPI: l.LogServiceAPI,
+		UserId: l.UserId,
+		NameService: l.NameService,
+	}
+}
+
 // Установка конфигурации logger.
 func (l *LoggerStruct) SetConfig(config *Config) {
 	if config == nil {

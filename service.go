@@ -10,6 +10,8 @@ func NewLogger(config *Config) Logger {
 }
 
 type Logger interface {
+	// Создание дочернего логера.
+	ChildLogger() Logger 
 	// Установка конфигурации logger.
 	SetConfig(*Config)
 	// Инициализация BackgroundEventStruct. (Родитель событий).
