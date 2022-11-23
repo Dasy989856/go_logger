@@ -1,6 +1,7 @@
 package logger
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -81,7 +82,7 @@ func (e *EventStruct) ToJson() ([]byte, error) {
 }
 
 // Вывод EventStruct в StdOut в формате Json.
-func (e *EventStruct) WriteToStdOut() {
+func (e *EventStruct) Print() {
 	if e == nil {
 		log.Print(fmt.Errorf("nil EventStruct"))
 		return
@@ -101,4 +102,30 @@ func (e *EventStruct) WriteToStdOut() {
 	fmt.Println(strings.Repeat("=", 25), "EventStruct", strings.Repeat("=", 25))
 	fmt.Println(string(EventStructJson))
 	fmt.Println(strings.Repeat("=", 60))
+}
+
+func (e *EventStruct) SendToLogService() error {
+	if e == nil {
+		return fmt.Errorf("nil logger")
+	}
+
+	if e.LogServiceAPI == "" {
+		return fmt.Errorf("empty Log service API")
+	}
+
+	jsonEventStruct, err := e.ToJson()
+	if err != nil {
+		return err
+	}
+
+	if e.Level == "warning" || e.Level == "error" || e.Level == "critical" {
+		e.Print()
+	}
+
+	respLog, err := http.Post(e.LogServiceAPI, "application/json", bytes.NewBuffer(jsonEventStruct))
+	if err != nil || respLog.StatusCode != http.StatusOK {
+		return err
+	}
+
+	return nil
 }

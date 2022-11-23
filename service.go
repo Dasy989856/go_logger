@@ -2,11 +2,11 @@ package logger
 
 // Инициализация logger.
 func NewLogger(config *Config) Logger {
-	var logger *LoggerStruct
+	logger := LoggerStruct{}
 	if config != nil {
 		logger.SetConfig(config)
 	}
-	return logger
+	return &logger
 }
 
 type Logger interface {
@@ -17,7 +17,7 @@ type Logger interface {
 	// Отправка в сервис логирования.
 	SendToLogService() error
 	// Вывод logger в StdOut в формате Json.
-	WriteToStdOut()
+	Print()
 	// Получение logger с трасировкой событий в формате Json.
 	ToJson() ([]byte, error)
 	// Форматирование logger в формат приемлемый для фронтенда.
@@ -48,5 +48,5 @@ type Event interface {
 	// Получение события в формате Json.
 	ToJson() ([]byte, error)
 	// Вывод EventStruct в StdOut в формате Json.
-	WriteToStdOut()
+	Print()
 }

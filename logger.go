@@ -54,12 +54,16 @@ func (l *LoggerStruct) SetConfig(config *Config) {
 func (l *LoggerStruct) InitParentEvent(packet, function string) ParentEvent {
 	if l == nil {
 		log.Print(fmt.Errorf("nil logger"))
-		return l
+		return nil
 	}
 
-	l.Package = packet
-	l.Function = function
-	return l
+	pEvent := ParentEventStruct{
+		Logger: l,
+		Package: packet,
+		Function: function,
+	}
+
+	return &pEvent
 }
 
 // Отправка в сервис логирования.
@@ -72,23 +76,28 @@ func (l *LoggerStruct) SendToLogService() error {
 		return fmt.Errorf("empty Log service API")
 	}
 
-	for _, EventStruct := range l.Events {
-		jsonEventStruct, err := EventStruct.ToJson()
+	for i, event := range l.Events {
+		jsonEventStruct, err := event.ToJson()
 		if err != nil {
 			return err
 		}
-		// Отправка лога и получение ответа от сервиса логирования.
+
+		if event.Level == "warning" || event.Level == "error" || event.Level == "critical" {
+			event.Print()
+		}
+
 		respLog, err := http.Post(l.LogServiceAPI, "application/json", bytes.NewBuffer(jsonEventStruct))
 		if err != nil || respLog.StatusCode != http.StatusOK {
 			return err
 		}
+		l.Events = l.Events[i:]
 	}
 
 	return nil
 }
 
 // Вывод logger в StdOut в формате Json.
-func (l *LoggerStruct) WriteToStdOut() {
+func (l *LoggerStruct) Print() {
 	if l == nil {
 		log.Print(fmt.Errorf("nil logger"))
 		return
