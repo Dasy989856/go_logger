@@ -155,6 +155,8 @@ func (l *LoggerStruct) ToJson() []byte {
 }
 
 // Форматирование событий в формат приемлемый для фронтенда.
+// Если в логере есть ошибки, возварается структура с ошибками.
+// Если ошибок нет - возвращаются события типа info.
 func (l *LoggerStruct) ToJsonForFrontend() []byte {
 	if l == nil {
 		log.Print("nil logger")
@@ -171,8 +173,12 @@ func (l *LoggerStruct) ToJsonForFrontend() []byte {
 }
 
 func toJsonForFrontendErrorResponse(logger *LoggerStruct) []byte {
+	if len(logger.Events) <= 0 {
+		return []byte(`{"status":"error", "message":"logger is empty"}`)
+	}
+
 	bodyResponse := struct {
-		Events []FrontendEvent `json:"events"`
+		Errors []FrontendEvent `json:"errors"`
 	}{}
 
 	for _, event := range logger.Events {
@@ -182,7 +188,7 @@ func toJsonForFrontendErrorResponse(logger *LoggerStruct) []byte {
 			frontendEvent.Message = MapCodes[event.Code]
 			frontendEvent.Params = event.ParamsMessage
 			frontendEvent.Field = event.Context["field"]
-			bodyResponse.Events = append(bodyResponse.Events, frontendEvent)
+			bodyResponse.Errors = append(bodyResponse.Errors, frontendEvent)
 		}
 	}
 
@@ -200,6 +206,10 @@ func toJsonForFrontendErrorResponse(logger *LoggerStruct) []byte {
 }
 
 func toJsonForFrontendResponse(logger *LoggerStruct) []byte {
+	if len(logger.Events) <= 0 {
+		return []byte(`{"status":"ok", "message":"logger is empty"}`)
+	}
+
 	bodyResponse := struct {
 		Events []FrontendEvent `json:"events"`
 	}{}
