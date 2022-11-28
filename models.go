@@ -49,10 +49,10 @@ type EventStruct struct {
 	StatusHTTP    int                    `json:"statusHTTP,omitempty"`    // Код HTTP ответа. (200, 400, 404, 500...)
 }
 
-// Структура ошибки в формате для Фронтенд.
-type FrontError struct {
-	Code    int         `json:"code"`             // Код ошибки.
-	Message string      `json:"message"`          // Сообщение ошибки.
+// Структура события в формате для Фронтенд.
+type FrontendEvent struct {
+	Code    int         `json:"code"`             // Код события.
+	Message string      `json:"message"`          // Сообщение события.
 	Params  []string    `json:"params,omitempty"` // Параметры сообщения.
 	Field   interface{} `json:"field,omitempty"`  // Поле(ключ) Json в котором произошла ошибка.
 }

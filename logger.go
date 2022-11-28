@@ -28,10 +28,10 @@ func ParseLogLevel(loglevel string) Level {
 
 func (l *LoggerStruct) ChildLogger() Logger {
 	return &LoggerStruct{
-		LogLevel: l.LogLevel,
+		LogLevel:      l.LogLevel,
 		LogServiceAPI: l.LogServiceAPI,
-		UserId: l.UserId,
-		NameService: l.NameService,
+		UserId:        l.UserId,
+		NameService:   l.NameService,
 	}
 }
 
@@ -61,7 +61,7 @@ func (l *LoggerStruct) SetConfig(config *Config) {
 
 // Установка конфигурации logger.
 func (l *LoggerStruct) SetUserId(userId int) {
-		l.UserId = userId
+	l.UserId = userId
 }
 
 // Создание родительского события.
@@ -72,8 +72,8 @@ func (l *LoggerStruct) InitParentEvent(packet, function string) ParentEvent {
 	}
 
 	pEvent := ParentEventStruct{
-		Logger: l,
-		Package: packet,
+		Logger:   l,
+		Package:  packet,
 		Function: function,
 	}
 
@@ -155,34 +155,71 @@ func (l *LoggerStruct) ToJson() []byte {
 }
 
 // Форматирование событий в формат приемлемый для фронтенда.
-func (l *LoggerStruct) ToFrontendJson() []byte {
+func (l *LoggerStruct) ToJsonForFrontend() []byte {
 	if l == nil {
 		log.Print("nil logger")
 		return nil
 	}
 
+	// Проверка логера на ошибки.
+	for _, event := range l.Events {
+		if event.Level == "critical" || event.Level == "error" || event.Level == "warning" {
+			return toJsonForFrontendErrorResponse(l)
+		}
+	}
+	return toJsonForFrontendResponse(l)
+}
+
+func toJsonForFrontendErrorResponse(logger *LoggerStruct) []byte {
 	bodyResponse := struct {
-		Errors []FrontError `json:"errors"`
+		Events []FrontendEvent `json:"events"`
 	}{}
 
-	for _, log := range l.Events {
-		if log.Level != "error" {
-			continue
+	for _, event := range logger.Events {
+		if event.Level == "critical" || event.Level == "error" || event.Level == "warning" {
+			var frontendEvent FrontendEvent
+			frontendEvent.Code = event.Code
+			frontendEvent.Message = MapCodes[event.Code]
+			frontendEvent.Params = event.ParamsMessage
+			frontendEvent.Field = event.Context["field"]
+			bodyResponse.Events = append(bodyResponse.Events, frontendEvent)
 		}
-
-		var frontLog FrontError
-		frontLog.Code = log.Code
-		frontLog.Message = log.Message
-		frontLog.Params = log.ParamsMessage
-		frontLog.Field = log.Context["field"]
-
-		bodyResponse.Errors = append(bodyResponse.Errors, frontLog)
 	}
 
 	jsonResp, err := json.Marshal(bodyResponse)
 	if err != nil {
 		context := map[string]interface{}{
-			"logger": l,
+			"func": "toJsonForFrontendErrorResponse",
+			"logger": logger,
+			"error":  err.Error(),
+		}
+		log.Print(context)
+		return nil
+	}
+	return jsonResp
+}
+
+func toJsonForFrontendResponse(logger *LoggerStruct) []byte {
+	bodyResponse := struct {
+		Events []FrontendEvent `json:"events"`
+	}{}
+
+	for _, event := range logger.Events {
+		if event.Level == "info" {
+			var frontendEvent FrontendEvent
+			frontendEvent.Code = event.Code
+			frontendEvent.Message = MapCodes[event.Code]
+			frontendEvent.Params = event.ParamsMessage
+			frontendEvent.Field = event.Context["field"]
+			bodyResponse.Events = append(bodyResponse.Events, frontendEvent)
+		}
+	}
+
+	jsonResp, err := json.Marshal(bodyResponse)
+	if err != nil {
+		context := map[string]interface{}{
+			"func": "toJsonForFrontendResponse",
+			"logger": logger,
 			"error":  err.Error(),
 		}
 		log.Print(context)

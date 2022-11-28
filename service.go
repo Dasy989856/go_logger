@@ -25,7 +25,7 @@ type Logger interface {
 	// Получение logger с трасировкой событий в формате Json.
 	ToJson() []byte
 	// Форматирование logger в формат приемлемый для фронтенда.
-	ToFrontendJson() []byte
+	ToJsonForFrontend() []byte
 	// Получение HTTP статуса logger (статус крайнего события).
 	GetStatusHTTP() int
 }
