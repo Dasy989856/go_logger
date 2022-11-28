@@ -1,5 +1,7 @@
 package logger
 
+import "net/http"
+
 // Инициализация logger.
 func NewLogger(config *Config) Logger {
 	logger := LoggerStruct{}
@@ -11,7 +13,7 @@ func NewLogger(config *Config) Logger {
 
 type Logger interface {
 	// Создание дочернего логера.
-	ChildLogger() Logger 
+	ChildLogger() Logger
 	// Установка конфигурации logger.
 	SetConfig(*Config)
 	// Установка UserID.
@@ -55,4 +57,22 @@ type Event interface {
 	ToJson() []byte
 	// Вывод EventStruct в StdOut в формате Json.
 	Print()
+}
+
+// Завершение для обработчиков. Отправляет в ответ массив ошибок, если ошибок нет отправляет предоставленный ответ.
+func DeferForHandlers(logger Logger, rw http.ResponseWriter, r *http.Request, response []byte) {
+	defer func() {
+		r.Body.Close()
+		if err := logger.SendToLogService(); err != nil {
+			logger.Print()
+		}
+	}()
+
+	if logger.GetStatusHTTP() >= 200 && logger.GetStatusHTTP() <= 299 {
+		rw.WriteHeader(logger.GetStatusHTTP())
+		rw.Write(logger.ToJsonForFrontend())
+	} else {
+		rw.WriteHeader(logger.GetStatusHTTP())
+		rw.Write(response)
+	}
 }
