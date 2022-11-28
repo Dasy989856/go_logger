@@ -60,12 +60,12 @@ type Event interface {
 }
 
 // Завершение для обработчиков. Отправляет в ответ массив ошибок, если ошибок нет отправляет предоставленный ответ.
-func DeferForHandlers(logger Logger, rw http.ResponseWriter, r *http.Request, response []byte) {
+func ResponseForHandlers(logger Logger, rw http.ResponseWriter, r *http.Request, response []byte) {
 	defer func() {
-		r.Body.Close()
 		if err := logger.SendToLogService(); err != nil {
 			logger.Print()
 		}
+		r.Body.Close()
 	}()
 
 	if logger.GetStatusHTTP() >= 200 && logger.GetStatusHTTP() <= 299 {
