@@ -27,7 +27,9 @@ type Logger interface {
 	// Форматирование logger в формат приемлемый для фронтенда.
 	ToJsonForFrontend() []byte
 	// Получение HTTP статуса logger (статус крайнего события).
-	GetStatusHTTP() int
+	GetStatusHTTP() (statusHTTP int)
+	// Возвращает количество ошибок урвоень которых выше или равен warning. (warning, error, critical)
+	GetNumberOfErrors() (counterError int)
 }
 
 type ParentEvent interface {

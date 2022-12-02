@@ -12,6 +12,7 @@ func main() {
 		if err := logger.SendToLogService(); err != nil {
 			logger.Print()
 		}
+		fmt.Println("CounterErr: ", logger.GetNumberOfErrors())
 	}()
 	pEvent := logger.InitParentEvent("main", "main")
 

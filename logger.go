@@ -247,3 +247,13 @@ func (l *LoggerStruct) GetStatusHTTP() int {
 	}
 	return http.StatusOK
 }
+
+// Возвращает количество ошибок урвоень которых выше или равен warning. (warning, error, critical)
+func (l *LoggerStruct) GetNumberOfErrors() (counterError int) {
+	for _, e := range l.Events {
+		if ParseLogLevel(e.Level) >= WarningLevel {
+			counterError++
+		}
+	}
+	return
+}
