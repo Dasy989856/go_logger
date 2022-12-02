@@ -135,11 +135,11 @@ func (l *LoggerStruct) ToJson() []byte {
 	}
 
 	logger := struct {
-		LogLevel     Level          `json:"logLevel"`
-		EventStructs []*EventStruct `json:"EventStructs"`
+		LogLevel Level          `json:"logLevel"`
+		Events   []*EventStruct `json:"events"`
 	}{
-		LogLevel:     l.LogLevel,
-		EventStructs: arrEventStructs,
+		LogLevel: l.LogLevel,
+		Events:   arrEventStructs,
 	}
 
 	jsonLogger, err := json.Marshal(logger)
@@ -164,10 +164,8 @@ func (l *LoggerStruct) ToJsonForFrontend() []byte {
 	}
 
 	// Проверка логера на ошибки.
-	for _, event := range l.Events {
-		if event.Level == "critical" || event.Level == "error" || event.Level == "warning" {
-			return toJsonForFrontendErrorResponse(l)
-		}
+	if l.GetNumberOfErrors() != 0 {
+		return toJsonForFrontendErrorResponse(l)
 	}
 	return toJsonForFrontendResponse(l)
 }
@@ -195,7 +193,7 @@ func toJsonForFrontendErrorResponse(logger *LoggerStruct) []byte {
 	jsonResp, err := json.Marshal(bodyResponse)
 	if err != nil {
 		context := map[string]interface{}{
-			"func": "toJsonForFrontendErrorResponse",
+			"func":   "toJsonForFrontendErrorResponse",
 			"logger": logger,
 			"error":  err.Error(),
 		}
@@ -228,7 +226,7 @@ func toJsonForFrontendResponse(logger *LoggerStruct) []byte {
 	jsonResp, err := json.Marshal(bodyResponse)
 	if err != nil {
 		context := map[string]interface{}{
-			"func": "toJsonForFrontendResponse",
+			"func":   "toJsonForFrontendResponse",
 			"logger": logger,
 			"error":  err.Error(),
 		}
