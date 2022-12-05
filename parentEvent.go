@@ -21,7 +21,7 @@ func (p *ParentEventStruct) Critical(codeMessage int, paramsMessage ...string) E
 		event.Message = strings.Replace(event.Message, "%v", param, 1)
 	}
 
-	if p.Logger.LogLevel >= CriticalLevel {
+	if p.Logger.LogLevel <= CriticalLevel {
 		p.Logger.Events = append(p.Logger.Events, &event)
 	}
 
@@ -44,7 +44,7 @@ func (p *ParentEventStruct) Error(codeMessage int, paramsMessage ...string) Even
 		event.Message = strings.Replace(event.Message, "%v", param, 1)
 	}
 
-	if p.Logger.LogLevel >= ErrorLevel {
+	if p.Logger.LogLevel <= ErrorLevel {
 		p.Logger.Events = append(p.Logger.Events, &event)
 	}
 	return &event
@@ -66,7 +66,7 @@ func (p *ParentEventStruct) Warning(codeMessage int, paramsMessage ...string) Ev
 		event.Message = strings.Replace(event.Message, "%v", param, 1)
 	}
 
-	if p.Logger.LogLevel >= WarningLevel {
+	if p.Logger.LogLevel <= WarningLevel {
 		p.Logger.Events = append(p.Logger.Events, &event)
 	}
 	return &event
@@ -88,7 +88,7 @@ func (p *ParentEventStruct) Info(codeMessage int, paramsMessage ...string) Event
 		event.Message = strings.Replace(event.Message, "%v", param, 1)
 	}
 
-	if p.Logger.LogLevel >= InfoLevel {
+	if p.Logger.LogLevel <= InfoLevel {
 		p.Logger.Events = append(p.Logger.Events, &event)
 	}
 	return &event
@@ -110,7 +110,7 @@ func (p *ParentEventStruct) Debug(codeMessage int, paramsMessage ...string) Even
 		event.Message = strings.Replace(event.Message, "%v", param, 1)
 	}
 
-	if p.Logger.LogLevel >= DebugLevel {
+	if p.Logger.LogLevel <= DebugLevel {
 		p.Logger.Events = append(p.Logger.Events, &event)
 	}
 	return &event
