@@ -4,7 +4,7 @@ const (
 	Code_NoCode = 0
 )
 
-// Соотношение кода к сообщению.
+// Соотношение кода события к сообщению.
 var MapCodes = initMapCodes()
 
 func initMapCodes() map[int]string {
