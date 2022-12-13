@@ -3,21 +3,22 @@ package logger
 // ERROR (1000 - 5999)
 
 const (
-	Code_ErrorSendingGETrequest      = 1001 // Ошибка отправки GET запроса.
-	Code_ErrorSendingPOSTrequest     = 1002 // Ошибка отправки POST запроса.
-	Code_ErrorSendingPUTrequest      = 1003 // Ошибка отправки PUT запроса.
-	Code_ErrorSendingPATCHrequest    = 1004 // Ошибка отправки PATCH запроса.
-	Code_ErrorSendingDELETErequest   = 1005 // Ошибка отправки DELETE запроса.
-	Code_ErrorSendingCOPYrequest     = 1006 // Ошибка отправки COPY запроса.
-	Code_ErrorSendingHEADrequest     = 1007 // Ошибка отправки HEAD запроса.
-	Code_ErrorSendingOPTIONSrequest  = 1008 // Ошибка отправки OPTIONS запроса.
-	Code_ErrorSendingLINKrequest     = 1009 // Ошибка отправки LINK запроса.
-	Code_ErrorSendingUNLINKrequest   = 1010 // Ошибка отправки UNLINK запроса.
-	Code_ErrorSendingPURGErequest    = 1011 // Ошибка отправки PURGE запроса.
-	Code_ErrorSendingLOCKrequest     = 1012 // Ошибка отправки LOCK запроса.
-	Code_ErrorSendingUNLOCKrequest   = 1013 // Ошибка отправки UNLOCK запроса.
-	Code_ErrorSendingPROPFINDrequest = 1014 // Ошибка отправки PROPFIND запроса.
-	Code_ErrorSendingVIEWrequest     = 1015 // Ошибка отправки VIEW запроса.
+	Code_ErrorSendingGETrequest            = 1001 // Ошибка отправки GET запроса.
+	Code_ErrorSendingPOSTrequest           = 1002 // Ошибка отправки POST запроса.
+	Code_ErrorSendingPUTrequest            = 1003 // Ошибка отправки PUT запроса.
+	Code_ErrorSendingPATCHrequest          = 1004 // Ошибка отправки PATCH запроса.
+	Code_ErrorSendingDELETErequest         = 1005 // Ошибка отправки DELETE запроса.
+	Code_ErrorSendingCOPYrequest           = 1006 // Ошибка отправки COPY запроса.
+	Code_ErrorSendingHEADrequest           = 1007 // Ошибка отправки HEAD запроса.
+	Code_ErrorSendingOPTIONSrequest        = 1008 // Ошибка отправки OPTIONS запроса.
+	Code_ErrorSendingLINKrequest           = 1009 // Ошибка отправки LINK запроса.
+	Code_ErrorSendingUNLINKrequest         = 1010 // Ошибка отправки UNLINK запроса.
+	Code_ErrorSendingPURGErequest          = 1011 // Ошибка отправки PURGE запроса.
+	Code_ErrorSendingLOCKrequest           = 1012 // Ошибка отправки LOCK запроса.
+	Code_ErrorSendingUNLOCKrequest         = 1013 // Ошибка отправки UNLOCK запроса.
+	Code_ErrorSendingPROPFINDrequest       = 1014 // Ошибка отправки PROPFIND запроса.
+	Code_ErrorSendingVIEWrequest           = 1015 // Ошибка отправки VIEW запроса.
+	Code_ErrorWritingResponseToHTTPrequest = 1016 // Ошибка записи ответа в http запрос.
 
 	Code_ProxyError = 1020 // Ошибка проксирования.
 
@@ -53,19 +54,49 @@ const (
 	Code_AnInputPortHasAnOutputElement          = 1110 // У входного порта есть выходной элемент.
 	Code_AnUnsupportedLibraryTypeWasSpecified   = 1111 // Указан неподдерживаемый тип библиотеки.
 	Code_UnknownSolverType                      = 1112 // Неизвестный тип решателя.
+	Code_ErrorConvertingStringToLowerCase       = 1113 // Ошибка конвертации строки в нижний регистр.
 
 	Code_TheSelectorChannelIsClosed = 1150 // Канал Селектора закрыт.
 	Code_TheTrendChannelIsClosed    = 1151 // Канал трендов закрыт.
 
-	Code_TheProjectIdParameterIsInvalid  = 1201 // Параметр projectId невалиден.
-	Code_TheUserIdParameterIsInvalid     = 1202 // Параметр userId невалиден.
-	Code_TheUserIdHeaderIsInvalid        = 1203 // Заголовок userId невалиден.
-	Code_TheServiceKeyParameterIsInvalid = 1203 // Параметр serviceKey невалиден.
+	// Validation
+	Code_TheProjectIdParameterIsInvalid                   = 1201 // Параметр projectId невалиден.
+	Code_TheUserIdParameterIsInvalid                      = 1202 // Параметр userId невалиден.
+	Code_TheUserIdHeaderIsInvalid                         = 1203 // Заголовок userId невалиден.
+	Code_TheServiceKeyParameterIsInvalid                  = 1204 // Параметр serviceKey невалиден.
+	Code_LoginIsAlreadyInUse                              = 1205 // Логин уже в использовании.
+	Code_ThePhoneIsAlreadyInUse                           = 1206 // Телефон уже в использовании.
+	Code_EmailIsAlreadyInUse                              = 1207 // Электронная почта уже в использовании.
+	Code_LoginCannotBeEmpty                               = 1208 // Логин не может быть пустым.
+	Code_ThePhoneCannotBeEmpty                            = 1209 // Телефон не может быть пустым.
+	Code_EmailCannotBeEmpty                               = 1210 // Электронная почта не может быть пуста.
+	Code_ErrorParsingAddressToRedirectRequest             = 1211 // Ошибка парсинга адресса для перенаправления запроса.
+	Code_ErrorConvertingStringToInt                       = 1212 // Ошибка конвертации string в int.
+	Code_TheCountryCodeOfThePhoneNumberMustBeginWithAPlus = 1213 // Код страны номера телефона должен начинаться с +.
+	Code_InvalidPhoneFormat                               = 1214 // Неверный формат телефона.
+	Code_ThePasswordCannotBeEmpty                         = 1215 // Пароль не может быть пустым.
+	Code_TheAccountTypeCannotBeEmpty                      = 1216 // Тип аккаунта не может быть пустым.
+	Code_TheUsernameCannotBeEmpty                         = 1217 // Имя пользователя не может быть пустым.
+	Code_TheFullCompanyNameCannotBeEmpty                  = 1218 // Полное наименование компании не может быть пустым.
+	Code_LegalAddressCannotBeEmpty                        = 1219 // Юридический адрес не может быть пустым.
+	Code_PostalAddressCannotBeEmpty                       = 1220 // Почтовый адрес не может быть пустым.
+	Code_CurrentAccountCannotBeEmpty                      = 1221 // Расчетный счет не может быть пустым.
+	Code_BankNameCannotBeEmpty                            = 1222 // Наименование банка не может быть пустым.
+	Code_BICcannotBeEmpty                                 = 1223 // БИК не может быть пустым.
+	Code_INNcannotBeEmpty                                 = 1224 // ИНН банка не может быть пустым.
+	Code_KPPcannotBeEmpty                                 = 1225 // КПП банка не может быть пустым.
+	Code_CorrespondentAccountCannotBeEmpty                = 1226 // Корреспондентский счет не может быть пустым.
+	Code_PasswordsDoNotMatch                              = 1227 // Пароли не совпадают.
+	Code_OGRNIPcannotBeEmpty                              = 1228 // ОГРНИП не может быть пустым.
+	Code_OGRNcannotBeEmpty                                = 1229 // ОГРН не может быть пустым.
+	Code_KIOcannotBeEmpty                                 = 1230 // КИО не может быть пустым.
+	Code_TheLicenseCannotBeEmpty                          = 1231 // Лицензия не может быть пустым.
+	Code_TheLicenseDateCannotBeEmpty                      = 1232 // Дата лицензии не может быть пустым.
+	Code_AccountTypeIsNotSupported                        = 1233 // Тип аккаунта не поддерживается.
 
-	Code_ErrorConvertingStringToInt           = 1210 // Ошибка конвертации string в int.
-	Code_ErrorParsingAddressToRedirectRequest = 1211 // Ошибка парсинга адресса для перенаправления запроса.
-
-	Code_ErrorWritingToDatabase = 3001 // Ошибка записи в БД.
+	// DataBase
+	Code_ErrorWritingToDatabase   = 3001 // Ошибка записи в БД.
+	Code_ErrorReadingFromDatabase = 3002 // Ошибка чтения из БД.
 )
 
 func initCodesError() map[int]string {
@@ -120,21 +151,49 @@ func initCodesError() map[int]string {
 		1110: "An input port has an output element.",           // У входного порта есть выходной элемент.
 		1111: "An unsupported library type was specified.",     // Указан неподдерживаемый тип библиотеки.
 		1112: "Unknown solver type.",                           // Неизвестный тип решателя.
+		1113: "Error converting string to lower case.",         // Ошибка конвертации строки в нижний регистр.
 
 		1150: "The Selector channel is closed.", // Канал Селектора закрыт.
 		1151: "The Trend Channel is closed.",    // Канал трендов закрыт.
 
-		1201: "The projectId parameter is invalid",  // Параметр projectId невалиден.
-		1202: "The userId parameter is invalid",     // Параметр userId невалиден.
-		1203: "The userId header is invalid",        // Заголовок userId невалиден.
-		1204: "The serviceKey parameter is invalid", // Параметр serviceKey невалиден.
+		1201: "The projectId parameter is invalid",                      // Параметр projectId невалиден.
+		1202: "The userId parameter is invalid",                         // Параметр userId невалиден.
+		1203: "The userId header is invalid",                            // Заголовок userId невалиден.
+		1204: "The serviceKey parameter is invalid",                     // Параметр serviceKey невалиден.
+		1205: "Login is already in use.",                                // Логин уже в использовании.
+		1206: "The phone is already in use.",                            // Телефон уже в использовании.
+		1207: "Email is already in use.",                                // Электронная почта уже в использовании.
+		1208: "Login cannot be empty.",                                  // Логин не может быть пустым.
+		1209: "The phone cannot be empty.",                              // Телефон не может быть пустым.
+		1210: "Email cannot be empty.",                                  // Электронная почта не может быть пуста.
+		1211: "Error parsing address to redirect request.",              // Ошибка парсинга адресса для перенаправления запроса.
+		1212: "Error converting string to int.",                         // Ошибка конвертации string в int.
+		1213: "The country code of the phone number must begin with +.", // Код страны номера телефона должен начинаться с +.
+		1214: "Invalid phone format.",                                   // Неверный формат телефона.
+		1215: "The password cannot be empty.",                           // Пароль не может быть пустым.
+		1216: "The account type cannot be empty.",                       // Тип аккаунта не может быть пустым.
+		1217: "The username cannot be empty.",                           // Имя пользователя не может быть пустым.
+		1218: "The full company name cannot be empty.",                  // Полное наименование компании не может быть пустым.
+		1219: "Legal address cannot be empty.",                          // Юридический адрес не может быть пустым.
+		1220: "Postal address cannot be empty.",                         // Почтовый адрес не может быть пустым.
+		1221: "Current account cannot be empty.",                        // Расчетный счет не может быть пустым.
+		1222: "Bank name cannot be empty.",                              // Наименование банка не может быть пустым.
+		1223: "BIC cannot be empty.",                                    // БИК не может быть пустым.
+		1224: "INN cannot be empty.",                                    // ИНН банка не может быть пустым.
+		1225: "KPP cannot be empty.",                                    // КПП банка не может быть пустым.
+		1226: "Correspondent account cannot be empty.",                  // Корреспондентский счет не может быть пустым.
+		1227: "Passwords do not match.",                                 // Пароли не совпадают.
+		1228: "OGRNIP cannot be empty.",                                 // ОГРНИП не может быть пустым.
+		1229: "OGRN cannot be empty.",                                   // ОГРН не может быть пустым.
+		1230: "KIO cannot be empty.",                                    // КИО не может быть пустым.
+		1231: "The license cannot be empty.",                            // Лицензия не может быть пустым.
+		1232: "The license date cannot be empty.",                       // Дата лицензии не может быть пустым.
+		1233: "Account type is not supported.",                          // Тип аккаунта не поддерживается.
 
-		1210: "Error converting string to int.",            // Ошибка конвертации string в int.
-		1211: "Error parsing address to redirect request.", // Ошибка парсинга адресса для перенаправления запроса.
-
-		// 3000-3999 (DataBase)
+		//DataBase
 		3000: "Reserve",
-		3001: "Error writing to database.", // Ошибка записи в БД.
+		3001: "Error writing to database.",   // Ошибка записи в БД.
+		3002: "Error reading from database.", // Ошибка чтения из БД.
 	}
 
 	return mapCodesError

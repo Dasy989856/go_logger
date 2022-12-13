@@ -23,6 +23,10 @@ const (
 	Code_SuccessfulCreationOfTheNoNameFile = 7100 // Успешное создание NoName файла.
 	Code_SuccessfulFileTransfer            = 7101 // Успешная передача файлов.
 
+	Code_SuccessfulCompanyCreationInTheDataBase = 7200 // Успешное создание компании в базе данных.
+
+	Code_SuccessfulSendingOfAnEmailFromPasswordRecoveryToken = 7300 // Успешная отправка письма с токеном восстановления пароля.
+
 	Code_StartingAWebSocketConnection = 8001 // Старт подключения Web-Socket соединения.
 )
 
@@ -48,6 +52,10 @@ func initCodesInfo() map[int]string {
 
 		7100: "Successful creation of the NoName file.", // Успешное создание NoName файла.
 		7101: "Successful file transfer.",               // Успешная передача файлов.
+
+		7200: "Successful company creation in the database.", // Успешное создание компании в базе данных.
+
+		7300: "Successful sending of an email from password recovery token.", // Успешная отправка письма с токеном восстановления пароля.
 
 		8001: "Starting a Web-Socket connection.", // Старт подключения Web-Socket соединения.
 	}
