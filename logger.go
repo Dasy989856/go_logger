@@ -80,7 +80,7 @@ func (l *LoggerStruct) InitParentEvent(packet, function string) ParentEvent {
 	return &pEvent
 }
 
-// Отправка в сервис логирования.
+// Отправка в сервис логирования все события.
 func (l *LoggerStruct) SendToLogService() error {
 	if l == nil {
 		return fmt.Errorf("nil logger")
@@ -90,16 +90,18 @@ func (l *LoggerStruct) SendToLogService() error {
 		return fmt.Errorf("empty Log service API")
 	}
 
-	for i, event := range l.Events {
+	for _, event := range l.Events {
 		if event.Level == "warning" || event.Level == "error" || event.Level == "critical" {
 			event.Print()
 		}
 
 		respLog, err := http.Post(l.LogServiceAPI, "application/json", bytes.NewBuffer(event.ToJson()))
-		if err != nil || respLog.StatusCode != http.StatusOK {
+		if err != nil {
 			return err
 		}
-		l.Events = l.Events[i:]
+		if respLog.StatusCode != http.StatusOK {
+			return fmt.Errorf("status is not ok")
+		}
 	}
 
 	return nil
