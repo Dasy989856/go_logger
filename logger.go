@@ -182,6 +182,7 @@ func toJsonForFrontendErrorResponse(logger *LoggerStruct) []byte {
 	for _, event := range logger.Events {
 		if event.Level == "critical" || event.Level == "error" || event.Level == "warning" {
 			var frontendEvent FrontendEvent
+			frontendEvent.CreatedAt = event.CreatedAt
 			frontendEvent.Code = event.Code
 			frontendEvent.Message = MapCodes[event.Code]
 			frontendEvent.Params = event.ParamsMessage

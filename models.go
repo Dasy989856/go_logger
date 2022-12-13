@@ -19,11 +19,11 @@ type Config struct {
 
 // Структура логера.
 type LoggerStruct struct {
-	LogLevel      Level           `json:"logLevel,omitempty"`      // Уровень логирования.
-	LogServiceAPI string          `json:"logServiceAPI,omitempty"` // API сервиса логирования.
-	Events        []*EventStruct  `json:"events,omitempty"`        // Массив событий.
-	UserId        int             `json:"-"`                       // ID пользователя.
-	NameService   string          `json:"-"`                       // Название сервсиса.
+	LogLevel      Level          `json:"logLevel,omitempty"`      // Уровень логирования.
+	LogServiceAPI string         `json:"logServiceAPI,omitempty"` // API сервиса логирования.
+	Events        []*EventStruct `json:"events,omitempty"`        // Массив событий.
+	UserId        int            `json:"-"`                       // ID пользователя.
+	NameService   string         `json:"-"`                       // Название сервсиса.
 }
 
 type ParentEventStruct struct {
@@ -51,8 +51,9 @@ type EventStruct struct {
 
 // Структура события в формате для Фронтенд.
 type FrontendEvent struct {
-	Code    int         `json:"code"`             // Код события.
-	Message string      `json:"message"`          // Сообщение события.
-	Params  []string    `json:"params,omitempty"` // Параметры сообщения.
-	Field   interface{} `json:"field,omitempty"`  // Поле(ключ) Json в котором произошла ошибка.
+	CreatedAt string      `json:"createdAt"`        // Дата создания события.
+	Code      int         `json:"code"`             // Код события.
+	Message   string      `json:"message"`          // Сообщение события.
+	Params    []string    `json:"params,omitempty"` // Параметры сообщения.
+	Field     interface{} `json:"field,omitempty"`  // Поле(ключ) Json в котором произошла ошибка.
 }
