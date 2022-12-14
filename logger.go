@@ -242,9 +242,7 @@ func toJsonForFrontendResponse(logger *LoggerStruct) []byte {
 // Получение HTTP статуса logger (статус крайнего события).
 func (l *LoggerStruct) GetStatusHTTP() int {
 	for _, ev := range l.Events {
-		if ev.Level == "warning" || ev.Level == "error" || ev.Level == "critical" {
 			return ev.StatusHTTP
-		}
 	}
 	return http.StatusOK
 }
@@ -252,7 +250,7 @@ func (l *LoggerStruct) GetStatusHTTP() int {
 // Возвращает количество ошибок урвоень которых выше или равен warning. (warning, error, critical)
 func (l *LoggerStruct) GetNumberOfErrors() (counterError int) {
 	for _, e := range l.Events {
-		if ParseLogLevel(e.Level) >= WarningLevel {
+		if ParseLogLevel(e.Level) >= ErrorLevel {
 			counterError++
 		}
 	}
