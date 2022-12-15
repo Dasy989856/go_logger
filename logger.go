@@ -64,7 +64,7 @@ func (l *LoggerStruct) SetUserId(userId int) {
 	l.UserId = userId
 }
 
-// Создание родительского события.
+// Создание родительского события. )
 func (l *LoggerStruct) InitParentEvent(packet, function string) ParentEvent {
 	if l == nil {
 		log.Print(fmt.Errorf("nil logger"))
@@ -81,6 +81,7 @@ func (l *LoggerStruct) InitParentEvent(packet, function string) ParentEvent {
 }
 
 // Отправка в сервис логирования все события.
+// (Временно - дублирует события типа error и critical в stdOut)
 func (l *LoggerStruct) SendToLogService() error {
 	if l == nil {
 		return fmt.Errorf("nil logger")
@@ -91,7 +92,7 @@ func (l *LoggerStruct) SendToLogService() error {
 	}
 
 	for _, event := range l.Events {
-		if event.Level == "warning" || event.Level == "error" || event.Level == "critical" {
+		if event.Level == "error" || event.Level == "critical" {
 			event.Print()
 		}
 
@@ -166,13 +167,13 @@ func (l *LoggerStruct) ToJsonForFrontend() []byte {
 	}
 
 	// Проверка логера на ошибки.
-	if l.GetNumberOfErrors() != 0 {
-		return toJsonForFrontendErrorResponse(l)
+	if l.GetNumberOfErrors() != 0 || l.GetNumberOfWarning() != 0 {
+		return l.ToJsonForFrontendErrorResponse(l)
 	}
-	return toJsonForFrontendResponse(l)
+	return l.ToJson()
 }
 
-func toJsonForFrontendErrorResponse(logger *LoggerStruct) []byte {
+func (l *LoggerStruct) ToJsonForFrontendErrorResponse(logger *LoggerStruct) []byte {
 	if len(logger.Events) <= 0 {
 		return []byte(`{"status":"error", "message":"logger is empty"}`)
 	}
@@ -197,39 +198,6 @@ func toJsonForFrontendErrorResponse(logger *LoggerStruct) []byte {
 	if err != nil {
 		context := map[string]interface{}{
 			"func":   "toJsonForFrontendErrorResponse",
-			"logger": logger,
-			"error":  err.Error(),
-		}
-		log.Print(context)
-		return nil
-	}
-	return jsonResp
-}
-
-func toJsonForFrontendResponse(logger *LoggerStruct) []byte {
-	if len(logger.Events) <= 0 {
-		return []byte(`{"status":"ok", "message":"logger is empty"}`)
-	}
-
-	bodyResponse := struct {
-		Events []FrontendEvent `json:"events"`
-	}{}
-
-	for _, event := range logger.Events {
-		if event.Level == "info" {
-			var frontendEvent FrontendEvent
-			frontendEvent.Code = event.Code
-			frontendEvent.Message = MapCodes[event.Code]
-			frontendEvent.Params = event.ParamsMessage
-			frontendEvent.Field = event.Context["field"]
-			bodyResponse.Events = append(bodyResponse.Events, frontendEvent)
-		}
-	}
-
-	jsonResp, err := json.Marshal(bodyResponse)
-	if err != nil {
-		context := map[string]interface{}{
-			"func":   "toJsonForFrontendResponse",
 			"logger": logger,
 			"error":  err.Error(),
 		}

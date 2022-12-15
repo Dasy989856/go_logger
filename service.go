@@ -28,8 +28,12 @@ type Logger interface {
 	ToJsonForFrontend() []byte
 	// Получение HTTP статуса logger (статус крайнего события).
 	GetStatusHTTP() (statusHTTP int)
-	// Возвращает количество ошибок урвоень которых выше или равен warning. (warning, error, critical)
+	// Возвращает количество ошибок урвоень которых выше или равен error. (error, critical)
 	GetNumberOfErrors() (counterError int)
+	// Возвращает количество ошибок урвоень которых равен warning.
+	GetNumberOfWarning() (counterWarning int)
+	// Возвращает количество ошибок урвоень которых равен info.
+	GetNumberOfInfo() (counterInfo int)
 }
 
 type ParentEvent interface {
