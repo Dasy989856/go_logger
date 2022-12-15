@@ -12,21 +12,17 @@ func main() {
 		if err := logger.SendToLogService(); err != nil {
 			logger.Print()
 		}
+		fmt.Println(logger.GetStatusHTTP())
 		fmt.Println("CounterErr: ", logger.GetNumberOfErrors())
 	}()
 	pEvent := logger.InitParentEvent("main", "main")
 
-	var err error = nil
-	if err != nil {
-		event := pEvent.Critical(go_logger.Code_ErrorInitializingRepository)
-		event.AddError(err).Print()
+
+	if err := newFunc(logger); err != nil {
+		pEvent.Debug(go_logger.Code_NoCode).SetStatusHTTP(109999)
 		return
 	}
 
-	if err := newFunc(logger); err != nil {
-		pEvent.Debug(go_logger.Code_NoCode)
-		return
-	}
 
 	event := pEvent.Info(go_logger.Code_SuccessfulRepositoryInitialization)
 	event.AddContext(map[string]interface{}{"context": "test context"}).Print()
@@ -37,7 +33,7 @@ func newFunc(logger go_logger.Logger) error {
 
 	err := fmt.Errorf("error newFunc")
 	if err != nil {
-		pEvent.Error(go_logger.Code_NoCode).AddError(err)
+		pEvent.Error(go_logger.Code_NoCode).AddError(err).SetStatusHTTP(999)
 		return err
 	}
 	return nil
