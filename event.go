@@ -119,7 +119,14 @@ func (e *EventStruct) SendToLogService() error {
 	}
 
 	respLog, err := http.Post(e.LogServiceAPI, "application/json", bytes.NewBuffer(e.ToJson()))
-	if err != nil || respLog.StatusCode != http.StatusOK {
+	if err != nil {
+		log.Print(err)
+		return err
+	}
+	defer respLog.Body.Close()
+	
+	if respLog.StatusCode != http.StatusOK {
+		log.Print("response from Log Service not 200")
 		return err
 	}
 

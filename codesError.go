@@ -136,7 +136,8 @@ func initCodesError() map[int]string {
 		1082: "Error getting launch path", // Ошибка получения пути запуска,
 		1083: "Error transferring file.",  // Ошибка при передаче файла.
 
-		1097: "",                                               //
+		1097: "Invalid Refresh token.",                         // Некорректный Refresh токен.
+		1098: "Invalid Access token.",                          // Некорректный Access токен.
 		1099: "Empty Refresh token.",                           // Пустой Refresh токен.
 		1100: "Empty Access token.",                            // Пустой Access токен.
 		1101: "The projectId parameter is empty.",              // Параметр projectId пуст.
