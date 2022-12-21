@@ -57,6 +57,8 @@ type Event interface {
 	Error() string
 	// Получения сообщения кода.
 	GetMessage() string
+	// Установка кастомного сообщения событию.
+	SetMessage(message string)
 	// Получение события в формате Json.
 	ToJson() []byte
 	// Вывод EventStruct в StdOut в формате Json.
