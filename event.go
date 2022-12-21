@@ -77,6 +77,11 @@ func (e *EventStruct) GetMessage() string {
 	return e.Message
 }
 
+// Установка кастомного сообщения событию.
+func (e *EventStruct) SetMessage(message string) {
+	e.Message = message
+}
+
 // Получение события в формате Json.
 // TODO перевести в ручное форматирование к JSON. `https://go.dev/play/p/SH5bsrjzB06`
 func (e *EventStruct) ToJson() []byte {
