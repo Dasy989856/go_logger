@@ -100,6 +100,8 @@ func (l *LoggerStruct) SendToLogService() error {
 		if err != nil {
 			return err
 		}
+		defer respLog.Body.Close()
+
 		if respLog.StatusCode != http.StatusOK {
 			return fmt.Errorf("status is not ok")
 		}
