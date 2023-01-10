@@ -20,36 +20,48 @@
 
 ## Примеры использования go_logger:
 ### EXEMPALE 1 (Пробрасование логера для дальшейшего вывода трассировки логирования):
-- **Создание логера на корневом уровне (handler):** `logger := logger.logger.NewLogger(UserID, "NameService")`
+- **Создание логера на корневом уровне с пустой конфигурацией:** `logger := go_logger.NewLogger(nil)`
+
+- **Создание конфигурации и его установка:**
 ```
-UserID - Индификатор пользователя тип (int) если требуется фиксировать кто вызвал данный обработчик.
-NameService - Имя сервиса например Back-logger
+configLogger := go_logger.Config{
+		LogLevel:      viper.GetString("logger.level"),
+		LogServiceAPI: logServiceApi,
+		NameService:   models.NameService,
+	}
+logger.SetConfig(&configLogger)
 ```
 
-- **Инициализируем родительское событие (Backgraund EventStruct):** `bEventStruct := logger.InitBackgroundEventStruct("NamePackage", "NameFunction")`
+- **Создание дочернего logger. Он берет свойства конфигурации от родительского logger (Используется для hanlder):**
+```
+    handlerLogger := logger.ChildLogger()
+```
+
+- **Инициализируем родительское событие:** `pEvent := hLogger.InitParentEvent("NamePackage", "NameFunction")`
 ```
 NamePackage - имя пакета.
 NameFunction - имя функции.
 ```
 
-- **Создаем события нужного типа от родительского:** `EventStruct:= bEventStruct.Error(logger.Code, params1, params2)`
+- **Создаем события нужного типа от родительского:** `event := pEvent.Error(go_logger.Code_ErrorDecodingJson)`
+- **(Опционально) Добавление оригинальной ошибки и http статуса.**
+- **(Опционально) Добавление контекста события.**
+- **Example:**
+```
+if err != nil {
+    event := pEvent.Error(go_logger.Code_ErrorDecodingJson) // Создание события.
+    event.AddError(err) // Добавление в событие оригинальной ошибки.
+    event.SetStatusHTTP(http.StatusBadRequest) // Статус код который будет установлен в ответе на http запрос REST API.
+    event.AddContext(map[string]interface{}{"url": url, "password": pass}
+    return
+}
+```
+- **Логирование логера:**
+```
+logger.SendToLogService() - данный метод делает попытку отправки логов в сервис логирования. При неудачи выводит логи в StdOut.
+logger.Print() - вывод логов в StdOut.
+```
 ```
 logger.Code - логер содержит коды (либо дает возможность дать код определеному событию. Каждый код события соответсвует текстовому сообщению.
 params - это параметры для сообщения события. Пример: Ошибка подключения к БД %v. - params1 подставиться вместо %v.
-```
-
-- **(Опционально) Добавление оригинальной ошибки и http статуса:** `EventStruct.AddError(err, http.Status)`
-```
-err - оригинальная ошибка.
-http.Status - это статус который будет установлен в ответе на http запрос REST API.
-```
-
-- **(Опционально) Добавление контекста события:** `EventStruct.AddContext(map[string]interface{}{"url": url, "password": b64})`
-```
-    В функцию передается хэш-таблица с типом map[string]interface{}.
-```
-
-- **Логирование логера:** `logger.WriteToStdOut()` - выводит loger в stdout в json формате.
-```
-loger.SendToLogService() - данный метод требуется описать самостоятельно (TODO)
 ```
