@@ -55,6 +55,8 @@ const (
 	Code_AnUnsupportedLibraryTypeWasSpecified   = 1111 // Указан неподдерживаемый тип библиотеки.
 	Code_UnknownSolverType                      = 1112 // Неизвестный тип решателя.
 	Code_ErrorConvertingStringToLowerCase       = 1113 // Ошибка конвертации строки в нижний регистр.
+	Code_SolverTypeIsEmpty                      = 1114 // Тип решателя пуст.
+	Code_LibraryTypeIsEmpty                     = 1115 // Тип библиотеки пуст.
 
 	Code_TheSelectorChannelIsClosed = 1150 // Канал Селектора закрыт.
 	Code_TheTrendChannelIsClosed    = 1151 // Канал трендов закрыт.
@@ -93,6 +95,7 @@ const (
 	Code_TheLicenseCannotBeEmpty                          = 1231 // Лицензия не может быть пустым.
 	Code_TheLicenseDateCannotBeEmpty                      = 1232 // Дата лицензии не может быть пустым.
 	Code_AccountTypeIsNotSupported                        = 1233 // Тип аккаунта не поддерживается.
+	Code_ProjectNameIsEmpty                               = 1234 // Имя проекта пусто.
 
 	// DataBase
 	Code_ErrorWritingToDatabase   = 3001 // Ошибка записи в БД.
@@ -153,6 +156,8 @@ func initCodesError() map[int]string {
 		1111: "An unsupported library type was specified.",     // Указан неподдерживаемый тип библиотеки.
 		1112: "Unknown solver type.",                           // Неизвестный тип решателя.
 		1113: "Error converting string to lower case.",         // Ошибка конвертации строки в нижний регистр.
+		1114: "Solver type is empty",                           // Тип решателя пуст.
+		1115: "Library type is empty",                          // Тип библиотеки пуст.
 
 		1150: "The Selector channel is closed.", // Канал Селектора закрыт.
 		1151: "The Trend Channel is closed.",    // Канал трендов закрыт.
@@ -190,6 +195,7 @@ func initCodesError() map[int]string {
 		1231: "The license cannot be empty.",                            // Лицензия не может быть пустым.
 		1232: "The license date cannot be empty.",                       // Дата лицензии не может быть пустым.
 		1233: "Account type is not supported.",                          // Тип аккаунта не поддерживается.
+		1234: "Project name is empty.",                                  // Имя проекта пусто.
 
 		//DataBase
 		3000: "Reserve",
