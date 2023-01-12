@@ -32,12 +32,14 @@ const (
 	Code_WebSocketConnectionNotFound                = 1056 // Web-Socket соединение не найдено.
 	Code_ErrorClosingWebSocketConnection            = 1057 // Ошибка закрытия Web-Socket соединения.
 
-	Code_ErrorCreatingDirectory = 1078 // Ошибка создания каталога.
-	Code_FileDeletionError      = 1079 // Ошибка удаления файла.
-	Code_ErrorOpeningFile       = 1080 // Ошибка открытия файла.
-	Code_ProjectNotFound        = 1081 // Проект не найден.
-	Code_ErrorGettingLaunchPath = 1082 // Ошибка получения пути запуска.
-	Code_ErrorTransferringFile  = 1083 // Ошибка при передаче файла.
+	Code_ErrorCreatingDirectory       = 1078 // Ошибка создания каталога.
+	Code_FileDeletionError            = 1079 // Ошибка удаления файла.
+	Code_ErrorOpeningFile             = 1080 // Ошибка открытия файла.
+	Code_ProjectNotFound              = 1081 // Проект не найден.
+	Code_ErrorGettingLaunchPath       = 1082 // Ошибка получения пути запуска.
+	Code_ErrorTransferringFile        = 1083 // Ошибка при передаче файла.
+	Code_TheSolverIsAnswerIsIncorrect = 1084 // Ответ решателя неверный.
+	Code_IncorrectProjectSchema       = 1085 // Некорректная схема проекта.
 
 	Code_InvalidRefreshToken                    = 1097 // Некорректный Refresh токен.
 	Code_InvalidAccessToken                     = 1098 // Некорректный Access токен.
@@ -137,12 +139,14 @@ func initCodesError() map[int]string {
 		1056: "Web-Socket connection not found.",                  // Web-Socket соединение не найдено.
 		1057: "Error closing Web-Socket connection.",              // Ошибка закрытия Web-Socket соединения.
 
-		1078: "Error creating directory.", // Ошибка создания каталога.
-		1079: "File deletion error.",      // Ошибка удаления файла.
-		1080: "Error opening file.",       // Ошибка открытия файла.
-		1081: "Project not found.",        // Проект не найден.
-		1082: "Error getting launch path", // Ошибка получения пути запуска,
-		1083: "Error transferring file.",  // Ошибка при передаче файла.
+		1078: "Error creating directory.",          // Ошибка создания каталога.
+		1079: "File deletion error.",               // Ошибка удаления файла.
+		1080: "Error opening file.",                // Ошибка открытия файла.
+		1081: "Project not found.",                 // Проект не найден.
+		1082: "Error getting launch path",          // Ошибка получения пути запуска,
+		1083: "Error transferring file.",           // Ошибка при передаче файла.
+		1084: "The solver is answer is incorrect.", // Ответ решателя неверный.
+		1085: "Incorrect project schema.",          // Некорректная схема проекта.
 
 		1097: "Invalid Refresh token.",                         // Некорректный Refresh токен.
 		1098: "Invalid Access token.",                          // Некорректный Access токен.

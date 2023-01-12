@@ -26,6 +26,8 @@ const (
 	Code_SuccessfullySavingTheProject     = 7051 // Успешное сохранение проекта.
 	Code_SuccessfullyRetrievedTheLastSave = 7052 // Успешное получение последнего сохранения.
 	Code_SuccessfulDeletionOfTheProject   = 7053 // Успешное удаление проекта.
+	Code_SuccessfulStopOfTheTask          = 7054 // Успешная остановка задачи.
+	Code_SuccessfulLaunchOfTheTask        = 7055 // Успешная запуск задачи.
 
 	Code_SuccessfulCreationOfTheNoNameFile = 7100 // Успешное создание NoName файла.
 	Code_SuccessfulFileTransfer            = 7101 // Успешная передача файлов.
@@ -62,6 +64,8 @@ func initCodesInfo() map[int]string {
 		7051: "Successfully saving the project.",      // Успешное сохранение проекта.
 		7052: "Successfully retrieved the last save.", // Успешное получение последнего сохранения.
 		7053: "Successful deletion of the project.",   // Успешное удаление проекта.
+		7054: "Successful stop of the task.",          // Успешная остановка задачи.
+		7055: "Successful launch of the task.",        // Успешная запуск задачи.
 
 		7100: "Successful creation of the NoName file.", // Успешное создание NoName файла.
 		7101: "Successful file transfer.",               // Успешная передача файлов.
