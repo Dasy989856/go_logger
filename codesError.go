@@ -20,7 +20,8 @@ const (
 	Code_ErrorSendingVIEWrequest           = 1015 // Ошибка отправки VIEW запроса.
 	Code_ErrorWritingResponseToHTTPrequest = 1016 // Ошибка записи ответа в http запрос.
 
-	Code_ProxyError = 1020 // Ошибка проксирования.
+	Code_ProxyError         = 1020 // Ошибка проксирования.
+	Code_AuthorisationError = 1021 // Ошибка авторизации.
 
 	Code_JsonEncodingError       = 1050 // Ошибка кодирования в JSON.
 	Code_ErrorDecodingJson       = 1051 // Ошибка декодирования JSON.
@@ -96,6 +97,9 @@ const (
 	Code_TheLicenseDateCannotBeEmpty                      = 1232 // Дата лицензии не может быть пустым.
 	Code_AccountTypeIsNotSupported                        = 1233 // Тип аккаунта не поддерживается.
 	Code_ProjectNameIsEmpty                               = 1234 // Имя проекта пусто.
+	Code_ParameterFieldIsEmpty                            = 1235 // Параметр field пуст.
+	Code_ParameterValueIsEmpty                            = 1236 // Параметр value пуст.
+	Code_UnknownTypeForTheFieldParameter                  = 1237 // Неизвестный тип для параметра field.
 
 	// DataBase
 	Code_ErrorWritingToDatabase   = 3001 // Ошибка записи в БД.
@@ -121,7 +125,8 @@ func initCodesError() map[int]string {
 		1014: "Error sending PROPFIND request.", // Ошибка отправки PROPFIND запроса.
 		1015: "Error sending VIEW request.",     // Ошибка отправки VIEW запроса.
 
-		1020: "Proxy error.", // Ошибка проксирования.
+		1020: "Proxy error.",         // Ошибка проксирования.
+		1021: "Authorisation Error.", // Ошибка авторизации.
 
 		1050: "JSON encoding error.",        // Ошибка кодирования в JSON.
 		1051: "Error decoding JSON.",        // Ошибка декодирования JSON.
@@ -196,6 +201,9 @@ func initCodesError() map[int]string {
 		1232: "The license date cannot be empty.",                       // Дата лицензии не может быть пустым.
 		1233: "Account type is not supported.",                          // Тип аккаунта не поддерживается.
 		1234: "Project name is empty.",                                  // Имя проекта пусто.
+		1235: "Parameter field is empty.",                               // Параметр field пуст.
+		1236: "Parameter value is empty.",                               // Параметр field пуст.
+		1237: "Неизвестный тип для параметра field.",                    // Неизвестный тип для параметра field.
 
 		//DataBase
 		3000: "Reserve",
