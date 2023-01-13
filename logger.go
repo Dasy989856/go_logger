@@ -88,6 +88,7 @@ func (l *LoggerStruct) SendToLogService() error {
 	}
 
 	if l.LogServiceAPI == "" {
+		l.Print()
 		return fmt.Errorf("empty Log service API")
 	}
 
@@ -97,14 +98,11 @@ func (l *LoggerStruct) SendToLogService() error {
 		}
 
 		respLog, err := http.Post(l.LogServiceAPI, "application/json", bytes.NewBuffer(event.ToJson()))
-		if err != nil {
+		if err != nil  || respLog.StatusCode != http.StatusOK {
+			l.Print()
 			return err
 		}
 		defer respLog.Body.Close()
-
-		if respLog.StatusCode != http.StatusOK {
-			return fmt.Errorf("status is not ok")
-		}
 	}
 
 	return nil
