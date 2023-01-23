@@ -80,7 +80,7 @@ func (l *LoggerStruct) InitParentEvent(packet, function string) ParentEvent {
 	return &pEvent
 }
 
-// Отправка в сервис логирования все события.
+// Отправка в сервис логирования все события. При ошибки выводит logger в StdOut.
 // (Временно - дублирует события типа error и critical в stdOut)
 func (l *LoggerStruct) SendToLogService() error {
 	if l == nil {
@@ -98,7 +98,7 @@ func (l *LoggerStruct) SendToLogService() error {
 		}
 
 		respLog, err := http.Post(l.LogServiceAPI, "application/json", bytes.NewBuffer(event.ToJson()))
-		if err != nil  || respLog.StatusCode != http.StatusOK {
+		if err != nil || respLog.StatusCode != http.StatusOK {
 			l.Print()
 			return err
 		}
@@ -183,15 +183,17 @@ func (l *LoggerStruct) ToJsonForFrontendErrorResponse(logger *LoggerStruct) []by
 	}{}
 
 	for _, event := range logger.Events {
-		if event.Context["forFrontend"] != nil && (event.Level == "critical" || event.Level == "error" || event.Level == "warning")  {
+		if event.Context["forFrontend"] != nil && (event.Level == "critical" || event.Level == "error" || event.Level == "warning") {
 			var frontendEvent FrontendEvent
 			frontendEvent.CreatedAt = event.CreatedAt
 			frontendEvent.Code = event.Code
-			if msg, ok := event.Context["message"].(string); ok {
-				frontendEvent.Message = msg
-			}
-			if msg, ok := MapCodes[event.Code]; ok {
-				frontendEvent.Message = msg
+			if event.Message == "" {
+				if msg, ok := event.Context["message"].(string); ok {
+					frontendEvent.Message = msg
+				}
+				if msg, ok := MapCodes[event.Code]; ok {
+					frontendEvent.Message = msg
+				}
 			}
 			frontendEvent.Params = event.ParamsMessage
 			frontendEvent.Field = event.Context["field"]
