@@ -187,6 +187,7 @@ func (l *LoggerStruct) ToJsonForFrontendErrorResponse(logger *LoggerStruct) []by
 			var frontendEvent FrontendEvent
 			frontendEvent.CreatedAt = event.CreatedAt
 			frontendEvent.Code = event.Code
+			frontendEvent.Message = event.Message
 			if event.Message == "" {
 				if msg, ok := event.Context["message"].(string); ok {
 					frontendEvent.Message = msg
