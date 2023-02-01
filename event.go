@@ -78,8 +78,9 @@ func (e *EventStruct) GetMessage() string {
 }
 
 // Установка кастомного сообщения событию.
-func (e *EventStruct) SetMessage(message string) {
+func (e *EventStruct) SetMessage(message string) Event {
 	e.Message = message
+	return e
 }
 
 // Получение события в формате Json.

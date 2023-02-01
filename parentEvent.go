@@ -1,6 +1,7 @@
 package logger
 
 import (
+	"net/http"
 	"strings"
 	"time"
 )
@@ -15,6 +16,7 @@ func (p *ParentEventStruct) Critical(codeMessage int, paramsMessage ...string) E
 		Level:     "critical",
 		Code:      codeMessage,
 		Message:   MapCodes[codeMessage],
+		StatusHTTP: http.StatusInternalServerError,
 	}
 
 	for _, param := range paramsMessage {
@@ -38,6 +40,7 @@ func (p *ParentEventStruct) Error(codeMessage int, paramsMessage ...string) Even
 		Level:     "error",
 		Code:      codeMessage,
 		Message:   MapCodes[codeMessage],
+		StatusHTTP: http.StatusInternalServerError,
 	}
 
 	for _, param := range paramsMessage {

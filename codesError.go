@@ -102,6 +102,7 @@ const (
 	Code_ParameterFieldIsEmpty                            = 1235 // Параметр field пуст.
 	Code_ParameterValueIsEmpty                            = 1236 // Параметр value пуст.
 	Code_UnknownTypeForTheFieldParameter                  = 1237 // Неизвестный тип для параметра field.
+	Code_InvalidEmailFormat                               = 1238 // Неверный формат почты.
 
 	// DataBase
 	Code_ErrorWritingToDatabase   = 3001 // Ошибка записи в БД.
@@ -207,9 +208,10 @@ func initCodesError() map[int]string {
 		1234: "Project name is empty.",                                  // Имя проекта пусто.
 		1235: "Parameter field is empty.",                               // Параметр field пуст.
 		1236: "Parameter value is empty.",                               // Параметр field пуст.
-		1237: "Неизвестный тип для параметра field.",                    // Неизвестный тип для параметра field.
+		1237: "Unknown type for the field parameter.",                   // Неизвестный тип для параметра field.
+		1238: "Code_InvalidEmailFormat",                                 // Неверный формат почты.
 
-		//DataBase
+		// DataBase
 		3000: "Reserve",
 		3001: "Error writing to database.",   // Ошибка записи в БД.
 		3002: "Error reading from database.", // Ошибка чтения из БД.
