@@ -209,7 +209,7 @@ func initCodesError() map[int]string {
 		1235: "Parameter field is empty.",                               // Параметр field пуст.
 		1236: "Parameter value is empty.",                               // Параметр field пуст.
 		1237: "Unknown type for the field parameter.",                   // Неизвестный тип для параметра field.
-		1238: "Invalid email format.",                                 // Неверный формат почты.
+		1238: "Invalid email format.",                                   // Неверный формат почты.
 
 		// DataBase
 		3000: "Reserve",

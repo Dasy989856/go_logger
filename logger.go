@@ -259,3 +259,8 @@ func (l *LoggerStruct) GetNumberOfInfo() (counterInfo int) {
 	}
 	return
 }
+
+// Возвращение всех событий.
+func (l *LoggerStruct) GetAllEvents() ([]*EventStruct) {
+	return l.Events
+}
