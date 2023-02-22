@@ -34,6 +34,8 @@ type Logger interface {
 	GetNumberOfWarning() (counterWarning int)
 	// Возвращает количество ошибок урвоень которых равен info.
 	GetNumberOfInfo() (counterInfo int)
+	// Возвращение всех событий.
+	GetAllEvents() ([]Event) 
 }
 
 type ParentEvent interface {
@@ -55,6 +57,8 @@ type Event interface {
 	AddContext(context map[string]interface{}) Event
 	// Получение оригинальной ошибки в формате string.
 	Error() string
+	// Получение кода события.
+	GetCode() int
 	// Получения сообщения кода.
 	GetMessage() string
 	// Установка кастомного сообщения событию.

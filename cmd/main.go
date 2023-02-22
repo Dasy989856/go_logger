@@ -19,7 +19,8 @@ func main() {
 
 
 	if err := newFunc(logger); err != nil {
-		pEvent.Debug(go_logger.Code_NoCode).SetStatusHTTP(109999)
+		event := pEvent.Debug(go_logger.Code_NoCode).SetStatusHTTP(109999)
+		event.Ge
 		return
 	}
 
