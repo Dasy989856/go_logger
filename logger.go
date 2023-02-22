@@ -261,6 +261,10 @@ func (l *LoggerStruct) GetNumberOfInfo() (counterInfo int) {
 }
 
 // Возвращение всех событий.
-func (l *LoggerStruct) GetAllEvents() ([]*EventStruct) {
-	return l.Events
+func (l *LoggerStruct) GetAllEvents() ([]Event) {
+	var sliceEvents []Event
+	for _, e := range l.Events {
+		sliceEvents = append(sliceEvents, e)
+	}
+	return sliceEvents
 }

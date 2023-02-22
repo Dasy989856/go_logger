@@ -72,6 +72,11 @@ func (e *EventStruct) Error() string {
 	return e.OriginalError
 }
 
+// Получение кода ошибки
+func (e *EventStruct) GetCode() int {
+	return e.Code
+}
+
 // Получения сообщения кода.
 func (e *EventStruct) GetMessage() string {
 	return e.Message
