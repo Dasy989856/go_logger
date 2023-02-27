@@ -9,7 +9,7 @@ import (
 func (p *ParentEventStruct) Critical(codeMessage int, paramsMessage ...string) Event {
 	event := EventStruct{
 		UserId:    p.Logger.UserId,
-		CreatedAt: time.Now().Format("2006-01-02 15:04:05.999 Z0700"),
+		CreatedAt: time.Now().Format("2006-01-02T15:04:05.999999Z0700"),
 		Service:   p.Logger.NameService,
 		Package:   p.Package,
 		Function:  p.Function,
@@ -33,7 +33,7 @@ func (p *ParentEventStruct) Critical(codeMessage int, paramsMessage ...string) E
 func (p *ParentEventStruct) Error(codeMessage int, paramsMessage ...string) Event {
 	event := EventStruct{
 		UserId:    p.Logger.UserId,
-		CreatedAt: time.Now().Format("2006-01-02 15:04:05.999 Z0700"),
+		CreatedAt: time.Now().Format("2006-01-02T15:04:05.999999Z0700"),
 		Service:   p.Logger.NameService,
 		Package:   p.Package,
 		Function:  p.Function,
@@ -56,7 +56,7 @@ func (p *ParentEventStruct) Error(codeMessage int, paramsMessage ...string) Even
 func (p *ParentEventStruct) Warning(codeMessage int, paramsMessage ...string) Event {
 	event := EventStruct{
 		UserId:    p.Logger.UserId,
-		CreatedAt: time.Now().Format("2006-01-02 15:04:05.999 Z0700"),
+		CreatedAt: time.Now().Format("2006-01-02T15:04:05.999999Z0700"),
 		Service:   p.Logger.NameService,
 		Package:   p.Package,
 		Function:  p.Function,
@@ -78,7 +78,7 @@ func (p *ParentEventStruct) Warning(codeMessage int, paramsMessage ...string) Ev
 func (p *ParentEventStruct) Info(codeMessage int, paramsMessage ...string) Event {
 	event := EventStruct{
 		UserId:    p.Logger.UserId,
-		CreatedAt: time.Now().Format("2006-01-02 15:04:05.999 Z0700"),
+		CreatedAt: time.Now().Format("2006-01-02T15:04:05.999999Z0700"),
 		Service:   p.Logger.NameService,
 		Package:   p.Package,
 		Function:  p.Function,
@@ -100,7 +100,7 @@ func (p *ParentEventStruct) Info(codeMessage int, paramsMessage ...string) Event
 func (p *ParentEventStruct) Debug(codeMessage int, paramsMessage ...string) Event {
 	event := EventStruct{
 		UserId:    p.Logger.UserId,
-		CreatedAt: time.Now().Format("2006-01-02 15:04:05.999 Z0700"),
+		CreatedAt: time.Now().Format("2006-01-02T15:04:05.999999Z0700"),
 		Service:   p.Logger.NameService,
 		Package:   p.Package,
 		Function:  p.Function,
