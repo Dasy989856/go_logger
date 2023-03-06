@@ -10,6 +10,8 @@ var MapCodes = initMapCodes()
 func initMapCodes() map[int]string {
 	mapCodes := make(map[int]string, 1000)
 
+	// lol, init
+
 	for k, v := range initCodesCritical() {
 		mapCodes[k] = v
 	}
