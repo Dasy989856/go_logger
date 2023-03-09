@@ -104,6 +104,9 @@ const (
 	Code_UnknownTypeForTheFieldParameter                  = 1237 // Неизвестный тип для параметра field.
 	Code_InvalidEmailFormat                               = 1238 // Неверный формат почты.
 
+	// VMs
+	Code_UnknownVirtualMachineType = 1301 // Неизвестный тип виртуальной машины
+
 	// DataBase
 	Code_ErrorWritingToDatabase   = 3001 // Ошибка записи в БД.
 	Code_ErrorReadingFromDatabase = 3002 // Ошибка чтения из БД.
@@ -210,6 +213,8 @@ func initCodesError() map[int]string {
 		1236: "Parameter value is empty.",                               // Параметр field пуст.
 		1237: "Unknown type for the field parameter.",                   // Неизвестный тип для параметра field.
 		1238: "Invalid email format.",                                   // Неверный формат почты.
+
+		1301: "Unknown virtual machine type", // Неизвестный тип виртуальной машины
 
 		// DataBase
 		3000: "Reserve",

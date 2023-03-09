@@ -183,7 +183,7 @@ func (l *LoggerStruct) ToJsonForFrontendErrorResponse(logger *LoggerStruct) []by
 	}{}
 
 	for _, event := range logger.Events {
-		if event.Context["forFrontend"] != nil && (event.Level == "critical" || event.Level == "error" || event.Level == "warning") {
+		if event.Level == "critical" || event.Level == "error" || event.Level == "warning"{
 			var frontendEvent FrontendEvent
 			frontendEvent.CreatedAt = event.CreatedAt
 			frontendEvent.Code = event.Code
@@ -203,7 +203,7 @@ func (l *LoggerStruct) ToJsonForFrontendErrorResponse(logger *LoggerStruct) []by
 	}
 
 	if len(bodyResponse.Errors) == 0 {
-		return []byte(`{"status":"not found error for frontend"}`)
+		return []byte(`{"status":"not found events"}`)
 	}
 
 	jsonResp, err := json.Marshal(bodyResponse)
