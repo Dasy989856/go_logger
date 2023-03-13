@@ -37,6 +37,7 @@ const (
 	Code_SuccessfulSendingOfAnEmailFromPasswordRecoveryToken = 7300 // Успешная отправка письма с токеном восстановления пароля.
 
 	Code_StartingAWebSocketConnection = 8001 // Старт подключения Web-Socket соединения.
+	Code_SuccessfulClosingWebSocketConnection = 8002 // Закрытие Web-Socket соединения. 
 )
 
 func initCodesInfo() map[int]string {
@@ -75,6 +76,7 @@ func initCodesInfo() map[int]string {
 		7300: "Successful sending of an email from password recovery token.", // Успешная отправка письма с токеном восстановления пароля.
 
 		8001: "Starting a Web-Socket connection.", // Старт подключения Web-Socket соединения.
+		8002: "Closing a Web-Socket connection.", // Закрытие Web-Socket соединения.
 	}
 
 	return mapCodesInfo
