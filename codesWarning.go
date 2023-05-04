@@ -18,8 +18,8 @@ func initCodesWarning() map[int]string {
 	mapCodesWarning := map[int]string{
 		6000: "Reserve",
 		6001: "There is no free virtual machine.",      // Нет свободной виртуальной машины.
-		6002: "The user occupies two virtual machines", // Пользователь занимает две виртуальные машины одновременно.
-		6003: "Automatic stop",                         // Проект остановился автоматически
+		6002: "The user occupies two virtual machines.", // Пользователь занимает две виртуальные машины одновременно.
+		6003: "Automatic stop.",                         // Проект остановился автоматически
 
 		6500: "Tariff resource exhausted.",              // Исчерпан ресурс тарифа.
 		6501: "The maximum number of running projects.", // Максимальное количество запущенных проектов.
