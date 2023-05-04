@@ -107,21 +107,23 @@ const (
 	Code_ParameterValueIsEmpty                            = 1236 // Параметр value пуст.
 	Code_UnknownTypeForTheFieldParameter                  = 1237 // Неизвестный тип для параметра field.
 	Code_InvalidEmailFormat                               = 1238 // Неверный формат почты.
-	Code_EmptyConfiguration                               = 1239 // Пустой параметр в конфиге
-	Code_LenghtDoesNotMatch                               = 1240 // Длина строк не совпадает
-	Code_InvalidPortFormat                                = 1241 // Невалидный формат портов
-	Code_ExampleIdIsZero                                  = 1242 // ID равен нулю
-
-	// Solvers
-	Code_SolverIsNotAvailable    = 1301 // Решатель недоступен
-	Code_InternalSolverError     = 1302 // Ошибка в решателе
-	Code_ErrorGetRangeFromMdCore = 1303 // Ошибка получения getRange от мдкора
-	Code_PropertyNotFound        = 1304 // Свойство элемента не найдено
-	Code_ElementPortNotFound     = 1305 // Порт элемента не найден
+	Code_ErrorConvertingStringToFloat                     = 1239 // Ошибка конвертации string в float.
+	Code_EmptyConfiguration                               = 1240 // Пустой параметр в конфиге
+	Code_LenghtDoesNotMatch                               = 1241 // Длина строк не совпадает
+	Code_InvalidPortFormat                                = 1242 // Невалидный формат портов
+	Code_ExampleIdIsZero                                  = 1243 // ID равен нулю
 
 	// Virtual machines (CVM)
-	Code_ErrorGettingFreeVM       = 1351 // Все свободные машины кончились
-	Code_VirtualMachineIsNotFound = 1352 // Виртуальная машина не найдена у пользователя
+	Code_UnknownVirtualMachineType = 1301 // Неизвестный тип виртуальной машины
+	Code_ErrorGettingFreeVM        = 1302 // Все свободные машины кончились
+	Code_VirtualMachineIsNotFound  = 1303 // Виртуальная машина не найдена у пользователя
+
+	// Solvers
+	Code_SolverIsNotAvailable    = 1351 // Решатель недоступен
+	Code_InternalSolverError     = 1352 // Ошибка в решателе
+	Code_ErrorGetRangeFromMdCore = 1353 // Ошибка получения getRange от мдкора
+	Code_PropertyNotFound        = 1354 // Свойство элемента не найдено
+	Code_ElementPortNotFound     = 1355 // Порт элемента не найден
 
 	// DataBase
 	Code_ErrorWritingToDatabase   = 3001 // Ошибка записи в БД.
@@ -234,19 +236,16 @@ func initCodesError() map[int]string {
 		1236: "Parameter value is empty.",                               // Параметр field пуст.
 		1237: "Unknown type for the field parameter.",                   // Неизвестный тип для параметра field.
 		1238: "Invalid email format.",                                   // Неверный формат почты.
-		1239: "Empty configuration.",                                    // Пустой параметр в конфиге.
-		1240: "Lenght does not match.",                                  // Длина строк не совпадает
-		1241: "Invalid port format.",                                    // Невалидный формат портов
-		1242: "Example ID is zero.",                                     // ID равен нулю
 
-		1301: "Solver is not available.",    // Решатель недоступен
-		1302: "Internal solver error.",      // Ошибка в решателе
-		1303: "Error getRange from MdCore.", // Ошибка получения getRange от мдкора
-		1304: "Property not found.",         // Свойство элемента не найдено
-		1305: "Element port not found.",     // Порт элемента не найден
+		1301: "Unknown virtual machine type",  // Неизвестный тип виртуальной машины
+		1302: "Error getting free VM.",        // Все свободные машины кончились
+		1303: "Virtual machine is not found.", // Виртуальная машина не найдена у пользователя
 
-		1351: "Error getting free VM.",        // Все свободные машины кончились
-		1352: "Virtual machine is not found.", // Виртуальная машина не найдена у пользователя
+		1351: "Solver is not available.",    // Решатель недоступен
+		1352: "Internal solver error.",      // Ошибка в решателе
+		1353: "Error getRange from MdCore.", // Ошибка получения getRange от мдкора
+		1354: "Property not found.",         // Свойство элемента не найдено
+		1355: "Element port not found.",     // Порт элемента не найден
 
 		// DataBase
 		3000: "Reserve",
