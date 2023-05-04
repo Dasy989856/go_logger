@@ -19,6 +19,7 @@ const (
 	Code_ErrorSendingPROPFINDrequest       = 1014 // Ошибка отправки PROPFIND запроса.
 	Code_ErrorSendingVIEWrequest           = 1015 // Ошибка отправки VIEW запроса.
 	Code_ErrorWritingResponseToHTTPrequest = 1016 // Ошибка записи ответа в http запрос.
+	Code_ErrorCreatingRequest              = 1017 // Ошибка создания запроса NewRequestWithContext
 
 	Code_ProxyError         = 1020 // Ошибка проксирования.
 	Code_AuthorisationError = 1021 // Ошибка авторизации.
@@ -40,6 +41,8 @@ const (
 	Code_ErrorTransferringFile        = 1083 // Ошибка при передаче файла.
 	Code_TheSolverIsAnswerIsIncorrect = 1084 // Ответ решателя неверный.
 	Code_IncorrectProjectSchema       = 1085 // Некорректная схема проекта.
+	Code_ErrorSavingProject           = 1086 // Ошибка сохранения проекта
+	Code_NilPointerError              = 1087 // Нулевой указатель
 
 	Code_InvalidRefreshToken                    = 1097 // Некорректный Refresh токен.
 	Code_InvalidAccessToken                     = 1098 // Некорректный Access токен.
@@ -60,6 +63,7 @@ const (
 	Code_ErrorConvertingStringToLowerCase       = 1113 // Ошибка конвертации строки в нижний регистр.
 	Code_SolverTypeIsEmpty                      = 1114 // Тип решателя пуст.
 	Code_LibraryTypeIsEmpty                     = 1115 // Тип библиотеки пуст.
+	Code_VmTypeIsEmpty                          = 1116 // Тип виртуальной машины пуст
 
 	Code_TheSelectorChannelIsClosed = 1150 // Канал Селектора закрыт.
 	Code_TheTrendChannelIsClosed    = 1151 // Канал трендов закрыт.
@@ -103,6 +107,21 @@ const (
 	Code_ParameterValueIsEmpty                            = 1236 // Параметр value пуст.
 	Code_UnknownTypeForTheFieldParameter                  = 1237 // Неизвестный тип для параметра field.
 	Code_InvalidEmailFormat                               = 1238 // Неверный формат почты.
+	Code_EmptyConfiguration                               = 1239 // Пустой параметр в конфиге
+	Code_LenghtDoesNotMatch                               = 1240 // Длина строк не совпадает
+	Code_InvalidPortFormat                                = 1241 // Невалидный формат портов
+	Code_ExampleIdIsZero                                  = 1242 // ID равен нулю
+
+	// Solvers
+	Code_SolverIsNotAvailable    = 1301 // Решатель недоступен
+	Code_InternalSolverError     = 1302 // Ошибка в решателе
+	Code_ErrorGetRangeFromMdCore = 1303 // Ошибка получения getRange от мдкора
+	Code_PropertyNotFound        = 1304 // Свойство элемента не найдено
+	Code_ElementPortNotFound     = 1305 // Порт элемента не найден
+
+	// Virtual machines (CVM)
+	Code_ErrorGettingFreeVM       = 1351 // Все свободные машины кончились
+	Code_VirtualMachineIsNotFound = 1352 // Виртуальная машина не найдена у пользователя
 
 	// DataBase
 	Code_ErrorWritingToDatabase   = 3001 // Ошибка записи в БД.
@@ -112,21 +131,23 @@ const (
 func initCodesError() map[int]string {
 	mapCodesError := map[int]string{
 		1000: "Reserve",
-		1001: "Error sending GET request.",      // Ошибка отправки GET запроса.
-		1002: "Error sending POST request.",     // Ошибка отправки POST запроса.
-		1003: "Error sending PUT request.",      // Ошибка отправки PUT запроса.
-		1004: "Error sending PATCH request.",    // Ошибка отправки PATCH запроса.
-		1005: "Error sending DELETE request.",   // Ошибка отправки DELETE запроса.
-		1006: "Error sending COPY request.",     // Ошибка отправки COPY запроса.
-		1007: "Error sending HEAD request.",     // Ошибка отправки HEAD запроса.
-		1008: "Error sending OPTIONS request.",  // Ошибка отправки OPTIONS запроса.
-		1009: "Error sending LINK request.",     // Ошибка отправки LINK запроса.
-		1010: "Error sending UNLINK request.",   // Ошибка отправки UNLINK запроса.
-		1011: "Error sending PURGE request.",    // Ошибка отправки PURGE запроса.
-		1012: "Error sending LOCK request.",     // Ошибка отправки LOCK запроса.
-		1013: "Error sending UNLOCK request.",   // Ошибка отправки UNLOCK запроса.
-		1014: "Error sending PROPFIND request.", // Ошибка отправки PROPFIND запроса.
-		1015: "Error sending VIEW request.",     // Ошибка отправки VIEW запроса.
+		1001: "Error sending GET request.",             // Ошибка отправки GET запроса.
+		1002: "Error sending POST request.",            // Ошибка отправки POST запроса.
+		1003: "Error sending PUT request.",             // Ошибка отправки PUT запроса.
+		1004: "Error sending PATCH request.",           // Ошибка отправки PATCH запроса.
+		1005: "Error sending DELETE request.",          // Ошибка отправки DELETE запроса.
+		1006: "Error sending COPY request.",            // Ошибка отправки COPY запроса.
+		1007: "Error sending HEAD request.",            // Ошибка отправки HEAD запроса.
+		1008: "Error sending OPTIONS request.",         // Ошибка отправки OPTIONS запроса.
+		1009: "Error sending LINK request.",            // Ошибка отправки LINK запроса.
+		1010: "Error sending UNLINK request.",          // Ошибка отправки UNLINK запроса.
+		1011: "Error sending PURGE request.",           // Ошибка отправки PURGE запроса.
+		1012: "Error sending LOCK request.",            // Ошибка отправки LOCK запроса.
+		1013: "Error sending UNLOCK request.",          // Ошибка отправки UNLOCK запроса.
+		1014: "Error sending PROPFIND request.",        // Ошибка отправки PROPFIND запроса.
+		1015: "Error sending VIEW request.",            // Ошибка отправки VIEW запроса.
+		1016: "Error writing response to HTTP request", // Ошибка записи ответа в http запрос.
+		1017: "Error creating request",                 // Ошибка создания запроса NewRequestWithContext
 
 		1020: "Proxy error.",         // Ошибка проксирования.
 		1021: "Authorisation Error.", // Ошибка авторизации.
@@ -148,6 +169,8 @@ func initCodesError() map[int]string {
 		1083: "Error transferring file.",           // Ошибка при передаче файла.
 		1084: "The solver is answer is incorrect.", // Ответ решателя неверный.
 		1085: "Incorrect project schema.",          // Некорректная схема проекта.
+		1086: "Error saving project.",              // Ошибка сохранения проекта
+		1087: "Nil pointer error.",                 // Нулевой указатель
 
 		1097: "Invalid Refresh token.",                         // Некорректный Refresh токен.
 		1098: "Invalid Access token.",                          // Некорректный Access токен.
@@ -166,8 +189,9 @@ func initCodesError() map[int]string {
 		1111: "An unsupported library type was specified.",     // Указан неподдерживаемый тип библиотеки.
 		1112: "Unknown solver type.",                           // Неизвестный тип решателя.
 		1113: "Error converting string to lower case.",         // Ошибка конвертации строки в нижний регистр.
-		1114: "Solver type is empty",                           // Тип решателя пуст.
-		1115: "Library type is empty",                          // Тип библиотеки пуст.
+		1114: "Solver type is empty.",                          // Тип решателя пуст.
+		1115: "Library type is empty.",                         // Тип библиотеки пуст.
+		1116: "VM type is empty.",                              // Тип виртуальной машины пуст.
 
 		1150: "The Selector channel is closed.", // Канал Селектора закрыт.
 		1151: "The Trend Channel is closed.",    // Канал трендов закрыт.
@@ -210,6 +234,19 @@ func initCodesError() map[int]string {
 		1236: "Parameter value is empty.",                               // Параметр field пуст.
 		1237: "Unknown type for the field parameter.",                   // Неизвестный тип для параметра field.
 		1238: "Invalid email format.",                                   // Неверный формат почты.
+		1239: "Empty configuration.",                                    // Пустой параметр в конфиге.
+		1240: "Lenght does not match.",                                  // Длина строк не совпадает
+		1241: "Invalid port format.",                                    // Невалидный формат портов
+		1242: "Example ID is zero.",                                     // ID равен нулю
+
+		1301: "Solver is not available.",    // Решатель недоступен
+		1302: "Internal solver error.",      // Ошибка в решателе
+		1303: "Error getRange from MdCore.", // Ошибка получения getRange от мдкора
+		1304: "Property not found.",         // Свойство элемента не найдено
+		1305: "Element port not found.",     // Порт элемента не найден
+
+		1351: "Error getting free VM.",        // Все свободные машины кончились
+		1352: "Virtual machine is not found.", // Виртуальная машина не найдена у пользователя
 
 		// DataBase
 		3000: "Reserve",
