@@ -74,8 +74,8 @@ func initCodesInfo() map[int]string {
 		7053: "Successful deletion of the project.",   // Успешное удаление проекта.
 		7054: "Successful stop of the task.",          // Успешная остановка задачи.
 		7055: "Successful launch of the task.",        // Успешная запуск задачи.
-		7056: "MDCore model time limit stop",
-		7057: "MDCore Dt limit stop",
+		7056: "MDCore model time limit stop.",
+		7057: "MDCore Dt limit stop.",
 
 		7100: "Successful creation of the NoName file.", // Успешное создание NoName файла.
 		7101: "Successful file transfer.",               // Успешная передача файлов.
