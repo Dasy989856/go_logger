@@ -119,11 +119,15 @@ const (
 	Code_VirtualMachineIsNotFound  = 1303 // Виртуальная машина не найдена у пользователя
 
 	// Solvers
-	Code_SolverIsNotAvailable    = 1351 // Решатель недоступен
-	Code_InternalSolverError     = 1352 // Ошибка в решателе
-	Code_ErrorGetRangeFromMdCore = 1353 // Ошибка получения getRange от мдкора
-	Code_PropertyNotFound        = 1354 // Свойство элемента не найдено
-	Code_ElementPortNotFound     = 1355 // Порт элемента не найден
+	Code_SolverIsNotAvailable       = 1351 // Решатель недоступен
+	Code_InternalSolverError        = 1352 // Ошибка в решателе
+	Code_ErrorGetRangeFromMdCore    = 1353 // Ошибка получения getRange от мдкора
+	Code_PropertyNotFound           = 1354 // Свойство элемента не найдено
+	Code_ElementPortNotFound        = 1355 // Порт элемента не найден
+	Code_MDcoreThreadError          = 1356 // Ошибка потока мдкора (поток упал)
+	Code_MDcoreCalculationError     = 1357 // Ошибка расчета модели
+	Code_MDCoreSchemaTraversalError = 1358 // Ошибка обхода схемы
+	Code_MDCoreParseError           = 1359 // Ошибка парсинга схемы (предпроверок)
 
 	// DataBase
 	Code_ErrorWritingToDatabase   = 3001 // Ошибка записи в БД.
@@ -167,7 +171,7 @@ func initCodesError() map[int]string {
 		1079: "File deletion error.",               // Ошибка удаления файла.
 		1080: "Error opening file.",                // Ошибка открытия файла.
 		1081: "Project not found.",                 // Проект не найден.
-		1082: "Error getting launch path.",          // Ошибка получения пути запуска,
+		1082: "Error getting launch path.",         // Ошибка получения пути запуска,
 		1083: "Error transferring file.",           // Ошибка при передаче файла.
 		1084: "The solver is answer is incorrect.", // Ответ решателя неверный.
 		1085: "Incorrect project schema.",          // Некорректная схема проекта.
@@ -198,10 +202,10 @@ func initCodesError() map[int]string {
 		1150: "The Selector channel is closed.", // Канал Селектора закрыт.
 		1151: "The Trend Channel is closed.",    // Канал трендов закрыт.
 
-		1201: "The projectId parameter is invalid.",                      // Параметр projectId невалиден.
-		1202: "The userId parameter is invalid.",                         // Параметр userId невалиден.
-		1203: "The userId header is invalid.",                            // Заголовок userId невалиден.
-		1204: "The serviceKey parameter is invalid.",                     // Параметр serviceKey невалиден.
+		1201: "The projectId parameter is invalid.",                     // Параметр projectId невалиден.
+		1202: "The userId parameter is invalid.",                        // Параметр userId невалиден.
+		1203: "The userId header is invalid.",                           // Заголовок userId невалиден.
+		1204: "The serviceKey parameter is invalid.",                    // Параметр serviceKey невалиден.
 		1205: "Login is already in use.",                                // Логин уже в использовании.
 		1206: "The phone is already in use.",                            // Телефон уже в использовании.
 		1207: "Email is already in use.",                                // Электронная почта уже в использовании.
@@ -237,7 +241,7 @@ func initCodesError() map[int]string {
 		1237: "Unknown type for the field parameter.",                   // Неизвестный тип для параметра field.
 		1238: "Invalid email format.",                                   // Неверный формат почты.
 
-		1301: "Unknown virtual machine type.",  // Неизвестный тип виртуальной машины
+		1301: "Unknown virtual machine type.", // Неизвестный тип виртуальной машины
 		1302: "Error getting free VM.",        // Все свободные машины кончились
 		1303: "Virtual machine is not found.", // Виртуальная машина не найдена у пользователя
 
@@ -246,6 +250,10 @@ func initCodesError() map[int]string {
 		1353: "Error getRange from MdCore.", // Ошибка получения getRange от мдкора
 		1354: "Property not found.",         // Свойство элемента не найдено
 		1355: "Element port not found.",     // Порт элемента не найден
+		1356: "MDCore thread error.",
+		1357: "MDCore calculation error.",
+		1358: "MDCore schema traversal error.",
+		1359: "MDCore parse error.", 
 
 		// DataBase
 		3000: "Reserve",

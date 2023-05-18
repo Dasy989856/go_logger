@@ -30,6 +30,8 @@ const (
 	Code_SuccessfulDeletionOfTheProject   = 7053 // Успешное удаление проекта.
 	Code_SuccessfulStopOfTheTask          = 7054 // Успешная остановка задачи.
 	Code_SuccessfulLaunchOfTheTask        = 7055 // Успешная запуск задачи.
+	Code_MDCoreModelTimeLimitStop         = 7056 // Успешная остановка задачи по лимиту времени моделирования
+	Code_MDCoreDtLimitStop                = 7057 // Успешная остановка задачи по лимиту времени моделирования по низкому шагу интегрирования
 
 	Code_SuccessfulCreationOfTheNoNameFile = 7100 // Успешное создание NoName файла.
 	Code_SuccessfulFileTransfer            = 7101 // Успешная передача файлов.
@@ -38,8 +40,8 @@ const (
 
 	Code_SuccessfulSendingOfAnEmailFromPasswordRecoveryToken = 7300 // Успешная отправка письма с токеном восстановления пароля.
 
-	Code_StartingAWebSocketConnection = 8001 // Старт подключения Web-Socket соединения.
-	Code_SuccessfulClosingWebSocketConnection = 8002 // Закрытие Web-Socket соединения. 
+	Code_StartingAWebSocketConnection         = 8001 // Старт подключения Web-Socket соединения.
+	Code_SuccessfulClosingWebSocketConnection = 8002 // Закрытие Web-Socket соединения.
 )
 
 func initCodesInfo() map[int]string {
@@ -72,6 +74,8 @@ func initCodesInfo() map[int]string {
 		7053: "Successful deletion of the project.",   // Успешное удаление проекта.
 		7054: "Successful stop of the task.",          // Успешная остановка задачи.
 		7055: "Successful launch of the task.",        // Успешная запуск задачи.
+		7056: "MDCore model time limit stop.",
+		7057: "MDCore Dt limit stop.",
 
 		7100: "Successful creation of the NoName file.", // Успешное создание NoName файла.
 		7101: "Successful file transfer.",               // Успешная передача файлов.
@@ -81,7 +85,7 @@ func initCodesInfo() map[int]string {
 		7300: "Successful sending of an email from password recovery token.", // Успешная отправка письма с токеном восстановления пароля.
 
 		8001: "Starting a Web-Socket connection.", // Старт подключения Web-Socket соединения.
-		8002: "Closing a Web-Socket connection.", // Закрытие Web-Socket соединения.
+		8002: "Closing a Web-Socket connection.",  // Закрытие Web-Socket соединения.
 	}
 
 	return mapCodesInfo
