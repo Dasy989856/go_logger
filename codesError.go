@@ -250,10 +250,10 @@ func initCodesError() map[int]string {
 		1353: "Error getRange from MdCore.", // Ошибка получения getRange от мдкора
 		1354: "Property not found.",         // Свойство элемента не найдено
 		1355: "Element port not found.",     // Порт элемента не найден
-		1356: "MDCore thread error",
-		1357: "MDCore calculation error",
-		1358: "MDCore schema traversal error",
-		1359: "MDCore parse error", 
+		1356: "MDCore thread error.",
+		1357: "MDCore calculation error.",
+		1358: "MDCore schema traversal error.",
+		1359: "MDCore parse error.", 
 
 		// DataBase
 		3000: "Reserve",
