@@ -21,8 +21,8 @@ const (
 	Code_SuccessfulInitializationOfTheVM                       = 7016 // Успешная инициализация виртуальной машины.
 	Code_SuccessfullyAddedTheMachinePoolToTheController        = 7017 // Успешное добавление пула машин в котроллер.
 	Code_SuccessfullyRemovedThePoolOfMachinesFromTheController = 7018 // Успешное удаления пула машин из котроллера.
-	Code_SuccessfullyAddedVmToTheProblemPool                   = 7019 // Успешное добавление машины в пул проблемных
-	Code_SuccessfullyFreedTheVirtualMachine                    = 7020 // Успешное освобождение машины
+	Code_SuccessfullyAddedVmToTheProblemPool                   = 7019 // Успешное добавление машины в пул проблемных.
+	Code_SuccessfullyFreedTheVirtualMachine                    = 7020 // Успешное освобождение машины.
 
 	Code_SuccessfulShutdownOfTheProject   = 7050 // Успешная остановка проекта.
 	Code_SuccessfullySavingTheProject     = 7051 // Успешное сохранение проекта.
@@ -30,8 +30,8 @@ const (
 	Code_SuccessfulDeletionOfTheProject   = 7053 // Успешное удаление проекта.
 	Code_SuccessfulStopOfTheTask          = 7054 // Успешная остановка задачи.
 	Code_SuccessfulLaunchOfTheTask        = 7055 // Успешная запуск задачи.
-	Code_MDCoreModelTimeLimitStop         = 7056 // Успешная остановка задачи по лимиту времени моделирования
-	Code_MDCoreDtLimitStop                = 7057 // Успешная остановка задачи по лимиту времени моделирования по низкому шагу интегрирования
+	Code_MDCoreModelTimeLimitStop         = 7056 // Успешная остановка задачи по лимиту времени моделирования.
+	Code_MDCoreDtLimitStop                = 7057 // Успешная остановка задачи по лимиту времени моделирования по низкому шагу интегрирования.
 
 	Code_SuccessfulCreationOfTheNoNameFile = 7100 // Успешное создание NoName файла.
 	Code_SuccessfulFileTransfer            = 7101 // Успешная передача файлов.
@@ -66,7 +66,7 @@ func initCodesInfo() map[int]string {
 		7017: "Successfully added the machine pool to the controller.",         // Успешное добавление пула машин в котроллер.
 		7018: "Successfully removed the pool of machines from the controller.", // Успешное удаление пула машин из котроллера.
 		7019: "Successfully added VM to the problem pool.",                     // Успешное добавление машины в пул проблемных.
-		7020: "Successfully freed the virtual machine.",                        // Успешное освобождение машины
+		7020: "Successfully freed the virtual machine.",                        // Успешное освобождение машины.
 
 		7050: "Successful shutdown of the project.",   // Успешная остановка проекта.
 		7051: "Successfully saving the project.",      // Успешное сохранение проекта.

@@ -41,8 +41,8 @@ const (
 	Code_ErrorTransferringFile        = 1083 // Ошибка при передаче файла.
 	Code_TheSolverIsAnswerIsIncorrect = 1084 // Ответ решателя неверный.
 	Code_IncorrectProjectSchema       = 1085 // Некорректная схема проекта.
-	Code_ErrorSavingProject           = 1086 // Ошибка сохранения проекта
-	Code_NilPointerError              = 1087 // Нулевой указатель
+	Code_ErrorSavingProject           = 1086 // Ошибка сохранения проекта.
+	Code_NilPointerError              = 1087 // Нулевой указатель.
 
 	Code_InvalidRefreshToken                    = 1097 // Некорректный Refresh токен.
 	Code_InvalidAccessToken                     = 1098 // Некорректный Access токен.
@@ -108,10 +108,12 @@ const (
 	Code_UnknownTypeForTheFieldParameter                  = 1237 // Неизвестный тип для параметра field.
 	Code_InvalidEmailFormat                               = 1238 // Неверный формат почты.
 	Code_ErrorConvertingStringToFloat                     = 1239 // Ошибка конвертации string в float.
-	Code_EmptyConfiguration                               = 1240 // Пустой параметр в конфиге
-	Code_LenghtDoesNotMatch                               = 1241 // Длина строк не совпадает
-	Code_InvalidPortFormat                                = 1242 // Невалидный формат портов
-	Code_ExampleIdIsZero                                  = 1243 // ID равен нулю
+	Code_EmptyConfiguration                               = 1240 // Пустой параметр в конфиге.
+	Code_LenghtDoesNotMatch                               = 1241 // Длина строк не совпадает.
+	Code_InvalidPortFormat                                = 1242 // Невалидный формат портов.
+	Code_ExampleIdIsZero                                  = 1243 // ID равен нулю.
+	Code_TheMessageCannotBeEmpty                          = 1244 // Соощение не может быть пустым.
+	Code_MessageLengthExceeded                            = 1245 // Длина сообщения превышена.
 
 	// Virtual machines (CVM)
 	Code_UnknownVirtualMachineType = 1301 // Неизвестный тип виртуальной машины
@@ -240,20 +242,27 @@ func initCodesError() map[int]string {
 		1236: "Parameter value is empty.",                               // Параметр field пуст.
 		1237: "Unknown type for the field parameter.",                   // Неизвестный тип для параметра field.
 		1238: "Invalid email format.",                                   // Неверный формат почты.
+		1239: "Error converting string to float.",                       // Ошибка конвертации string в float.
+		1240: "Empty configuration.",                                    // Пустой параметр в конфиге.
+		1241: "Lenght does not match.",                                  // Длина строк не совпадает.
+		1242: "Invalid port format.",                                    // Невалидный формат портов.
+		1243: "Example id is zero.",                                     // ID равен нулю.
+		1244: "The message cannot be empty.",                            // Соощение не может быть пустым.
+		1245: "Message length exceeded.",                                // Длина сообщения превышена.
 
-		1301: "Unknown virtual machine type.", // Неизвестный тип виртуальной машины
-		1302: "Error getting free VM.",        // Все свободные машины кончились
-		1303: "Virtual machine is not found.", // Виртуальная машина не найдена у пользователя
+		1301: "Unknown virtual machine type.", // Неизвестный тип виртуальной машины.
+		1302: "Error getting free VM.",        // Все свободные машины кончились.
+		1303: "Virtual machine is not found.", // Виртуальная машина не найдена у пользователя.
 
-		1351: "Solver is not available.",    // Решатель недоступен
-		1352: "Internal solver error.",      // Ошибка в решателе
-		1353: "Error getRange from MdCore.", // Ошибка получения getRange от мдкора
-		1354: "Property not found.",         // Свойство элемента не найдено
-		1355: "Element port not found.",     // Порт элемента не найден
+		1351: "Solver is not available.",    // Решатель недоступен.
+		1352: "Internal solver error.",      // Ошибка в решателе.
+		1353: "Error getRange from MdCore.", // Ошибка получения getRange от мдкора.
+		1354: "Property not found.",         // Свойство элемента не найдено.
+		1355: "Element port not found.",     // Порт элемента не найден.
 		1356: "MDCore thread error.",
 		1357: "MDCore calculation error.",
 		1358: "MDCore schema traversal error.",
-		1359: "MDCore parse error.", 
+		1359: "MDCore parse error.",
 
 		// DataBase
 		3000: "Reserve",
