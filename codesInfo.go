@@ -32,6 +32,7 @@ const (
 	Code_SuccessfulLaunchOfTheTask        = 7055 // Успешная запуск задачи.
 	Code_MDCoreModelTimeLimitStop         = 7056 // Успешная остановка задачи по лимиту времени моделирования.
 	Code_MDCoreDtLimitStop                = 7057 // Успешная остановка задачи по лимиту времени моделирования по низкому шагу интегрирования.
+	Code_FileUploadCompleted              = 7058 // Загрузка файла завершена!
 
 	Code_SuccessfulCreationOfTheNoNameFile = 7100 // Успешное создание NoName файла.
 	Code_SuccessfulFileTransfer            = 7101 // Успешная передача файлов.
@@ -76,6 +77,7 @@ func initCodesInfo() map[int]string {
 		7055: "Successful launch of the task.",        // Успешная запуск задачи.
 		7056: "MDCore model time limit stop.",
 		7057: "MDCore Dt limit stop.",
+		7058: "File upload completed!", // Загрузка файла завершена!
 
 		7100: "Successful creation of the NoName file.", // Успешное создание NoName файла.
 		7101: "Successful file transfer.",               // Успешная передача файлов.
