@@ -130,6 +130,7 @@ const (
 	Code_MDcoreCalculationError     = 1357 // Ошибка расчета модели
 	Code_MDCoreSchemaTraversalError = 1358 // Ошибка обхода схемы
 	Code_MDCoreParseError           = 1359 // Ошибка парсинга схемы (предпроверок)
+	Code_UnsupportedFmuFile         = 1360 // Неподдерживаемый ФМУ файл.
 
 	// DataBase
 	Code_ErrorWritingToDatabase   = 3001 // Ошибка записи в БД.
@@ -254,15 +255,16 @@ func initCodesError() map[int]string {
 		1302: "Error getting free VM.",        // Все свободные машины кончились.
 		1303: "Virtual machine is not found.", // Виртуальная машина не найдена у пользователя.
 
-		1351: "Solver is not available.",    // Решатель недоступен.
-		1352: "Internal solver error.",      // Ошибка в решателе.
-		1353: "Error getRange from MdCore.", // Ошибка получения getRange от мдкора.
-		1354: "Property not found.",         // Свойство элемента не найдено.
-		1355: "Element port not found.",     // Порт элемента не найден.
-		1356: "MDCore thread error.",
-		1357: "MDCore calculation error.",
-		1358: "MDCore schema traversal error.",
-		1359: "MDCore parse error.",
+		1351: "Solver is not available.",       // Решатель недоступен.
+		1352: "Internal solver error.",         // Ошибка в решателе.
+		1353: "Error getRange from MdCore.",    // Ошибка получения getRange от мдкора.
+		1354: "Property not found.",            // Свойство элемента не найдено.
+		1355: "Element port not found.",        // Порт элемента не найден.
+		1356: "MDCore thread error.",           // Критическая ошибка потока вычислений mdcore.
+		1357: "MDCore calculation error.",      // Ошибка вычислений mdcore.
+		1358: "MDCore schema traversal error.", // Ошибка обхода схемы mdcore.
+		1359: "MDCore parse error.",            // Ошибка синтаксического анализа MDCore.
+		1360: "Unsupported FMU file.",          // Неподдерживаемый ФМУ файл.
 
 		// DataBase
 		3000: "Reserve",
