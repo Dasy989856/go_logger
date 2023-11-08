@@ -114,6 +114,7 @@ const (
 	Code_ExampleIdIsZero                                  = 1243 // ID равен нулю.
 	Code_TheMessageCannotBeEmpty                          = 1244 // Соощение не может быть пустым.
 	Code_MessageLengthExceeded                            = 1245 // Длина сообщения превышена.
+	Code_InvalidLoginFormat                               = 1246 // Неверный формат логина.
 
 	// Virtual machines (CVM)
 	Code_UnknownVirtualMachineType = 1301 // Неизвестный тип виртуальной машины
@@ -251,6 +252,7 @@ func initCodesError() map[int]string {
 		1243: "Example id is zero.",                                     // ID равен нулю.
 		1244: "The message cannot be empty.",                            // Соощение не может быть пустым.
 		1245: "Message length exceeded.",                                // Длина сообщения превышена.
+		1246: "Code invalid login format.",                              // Неверный формат логина.
 
 		1301: "Unknown virtual machine type.", // Неизвестный тип виртуальной машины.
 		1302: "Error getting free VM.",        // Все свободные машины кончились.
