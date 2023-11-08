@@ -114,6 +114,7 @@ const (
 	Code_ExampleIdIsZero                                  = 1243 // ID равен нулю.
 	Code_TheMessageCannotBeEmpty                          = 1244 // Соощение не может быть пустым.
 	Code_MessageLengthExceeded                            = 1245 // Длина сообщения превышена.
+	Code_InvalidLoginFormat                               = 1246 // Неверный формат логина.
 
 	// Virtual machines (CVM)
 	Code_UnknownVirtualMachineType = 1301 // Неизвестный тип виртуальной машины
@@ -131,6 +132,7 @@ const (
 	Code_MDCoreSchemaTraversalError = 1358 // Ошибка обхода схемы
 	Code_MDCoreParseError           = 1359 // Ошибка парсинга схемы (предпроверок)
 	Code_UnsupportedFmuFile         = 1360 // Неподдерживаемый ФМУ файл.
+	Code_ProjectIsCyclicGraph       = 1361 // Проверка рекурсии блока-проект
 
 	// DataBase
 	Code_ErrorWritingToDatabase   = 3001 // Ошибка записи в БД.
@@ -250,6 +252,7 @@ func initCodesError() map[int]string {
 		1243: "Example id is zero.",                                     // ID равен нулю.
 		1244: "The message cannot be empty.",                            // Соощение не может быть пустым.
 		1245: "Message length exceeded.",                                // Длина сообщения превышена.
+		1246: "Code invalid login format.",                              // Неверный формат логина.
 
 		1301: "Unknown virtual machine type.", // Неизвестный тип виртуальной машины.
 		1302: "Error getting free VM.",        // Все свободные машины кончились.
@@ -265,6 +268,7 @@ func initCodesError() map[int]string {
 		1358: "MDCore schema traversal error.", // Ошибка обхода схемы mdcore.
 		1359: "MDCore parse error.",            // Ошибка синтаксического анализа MDCore.
 		1360: "Unsupported FMU file.",          // Неподдерживаемый ФМУ файл.
+		1361: "Project is cyclic graph.",       // Проверка рекурсии блока-проект
 
 		// DataBase
 		3000: "Reserve",
