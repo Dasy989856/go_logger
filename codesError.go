@@ -131,6 +131,7 @@ const (
 	Code_MDCoreSchemaTraversalError = 1358 // Ошибка обхода схемы
 	Code_MDCoreParseError           = 1359 // Ошибка парсинга схемы (предпроверок)
 	Code_UnsupportedFmuFile         = 1360 // Неподдерживаемый ФМУ файл.
+	Code_ProjectIsCyclicGraph       = 1361 // Проверка рекурсии блока-проект
 
 	// DataBase
 	Code_ErrorWritingToDatabase   = 3001 // Ошибка записи в БД.
@@ -265,6 +266,7 @@ func initCodesError() map[int]string {
 		1358: "MDCore schema traversal error.", // Ошибка обхода схемы mdcore.
 		1359: "MDCore parse error.",            // Ошибка синтаксического анализа MDCore.
 		1360: "Unsupported FMU file.",          // Неподдерживаемый ФМУ файл.
+		1361: "Project is cyclic graph.",       // Проверка рекурсии блока-проект
 
 		// DataBase
 		3000: "Reserve",
